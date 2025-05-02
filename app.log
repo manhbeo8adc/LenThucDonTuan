@@ -11563,3 +11563,276 @@ Format JSON:
   "service_tier": "default",
   "system_fingerprint": "fp_8fd43718b3"
 }
+2025-05-02 15:03:03,702 - api.openai_api - INFO - Generating menu for Thứ hai
+2025-05-02 15:03:03,702 - api.openai_api - INFO - Sending request to OpenAI API
+2025-05-02 15:03:07,355 - api.openai_api - INFO - Raw API Response:
+2025-05-02 15:03:07,355 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSfesMksLokxZHZFDg3d3Tkhn45Dw",
+  "object": "chat.completion",
+  "created": 1746173018,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"Th\u1ee9 hai\": {\n    \"B\u1eefa s\u00e1ng\": {\n      \"name\": \"Ch\u00e1o b\u00ed \u0111\u1ecf th\u1ecbt ngan h\u1ea5p\",\n      \"ingredients\": [\"b\u00ed \u0111\u1ecf\", \"g\u1ea1o\", \"th\u1ecbt ngan\", \"t\u1ecfi\", \"d\u1ea7u \u0103n\", \"h\u1ea1t ti\u00eau\"],\n      \"preparation_time\": 45,\n      \"estimated_cost\": 65000,\n      \"servings\": 4,\n      \"reused_ingredients\": [],\n      \"nutrition_info\": {\n        \"protein\": \"18g\",\n        \"carbs\": \"65g\",\n        \"fat\": \"10g\",\n        \"calories\": \"400kcal\"\n      },\n      \"cooking_method\": \"h\u1ea7m v\u00e0 h\u1ea5p\",\n      \"food_groups\": [\"\u0111\u1ea1m\", \"beta-carotene\", \"ng\u0169 c\u1ed1c\"]\n    },\n    \"B\u1eefa tr\u01b0a\": {\n      \"name\": \"S\u01b0\u1eddn heo rim d\u1ee9a\",\n      \"ingredients\": [\"s\u01b0\u1eddn heo\", \"d\u1ee9a\", \"n\u01b0\u1edbc m\u1eafm\", \"t\u1ecfi\", \"h\u1ea1t ti\u00eau\", \"\u0111\u01b0\u1eddng\"],\n      \"preparation_time\": 50,\n      \"estimated_cost\": 68000,\n      \"servings\": 4,\n      \"reused_ingredients\": [],\n      \"nutrition_info\": {\n        \"protein\": \"22g\",\n        \"carbs\": \"15g\",\n        \"fat\": \"20g\",\n        \"calories\": \"350kcal\"\n      },\n      \"cooking_method\": \"rim v\u00e0 kho\",\n      \"food_groups\": [\"\u0111\u1ea1m\", \"hoa qu\u1ea3\"]\n    },\n    \"B\u1eefa t\u1ed1i\": {\n      \"name\": \"Ng\u00f4 x\u00e0o t\u1ecfi v\u00e0 c\u1ea3i xoong\",\n      \"ingredients\": [\"ng\u00f4 ng\u1ecdt\", \"c\u1ea3i xoong\", \"t\u1ecfi\", \"d\u1ea7u \u0103n\", \"\u1edbt\"],\n      \"preparation_time\": 20,\n      \"estimated_cost\": 62000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"t\u1ecfi\"],\n      \"nutrition_info\": {\n        \"protein\": \"7g\",\n        \"carbs\": \"36g\",\n        \"fat\": \"5g\",\n        \"calories\": \"200kcal\"\n      },\n      \"cooking_method\": \"x\u00e0o\",\n      \"food_groups\": [\"ng\u0169 c\u1ed1c\", \"rau xanh\"]\n    }\n  }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 658,
+    "completion_tokens": 496,
+    "total_tokens": 1154,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
+2025-05-02 15:03:07,356 - api.openai_api - INFO - Generating menu for Thứ ba
+2025-05-02 15:03:07,356 - api.openai_api - INFO - Sending request to OpenAI API
+2025-05-02 15:03:10,990 - api.openai_api - INFO - Raw API Response:
+2025-05-02 15:03:10,990 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSfevmPgR96d3SFd3QO8TEHImyquF",
+  "object": "chat.completion",
+  "created": 1746173021,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"Th\u1ee9 ba\": {\n    \"B\u1eefa s\u00e1ng\": {\n      \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la b\u00ed \u0111\u1ecf\",\n      \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"Tr\u1ee9ng g\u00e0\", \"B\u00e1nh m\u00ec\", \"D\u1ea7u \u0103n\", \"\u1edat\", \"H\u1ea1t ti\u00eau\"],\n      \"preparation_time\": 20,\n      \"estimated_cost\": 65000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"\u1edbt\", \"h\u1ea1t ti\u00eau\"],\n      \"nutrition_info\": {\n        \"protein\": \"12g\",\n        \"carbs\": \"45g\",\n        \"fat\": \"10g\",\n        \"calories\": \"330 kcal\"\n      },\n      \"cooking_method\": \"Chi\u00ean/ n\u01b0\u1edbng\",\n      \"food_groups\": [\"\u0111\u1ea1m\", \"b\u1ed9t \u0111\u01b0\u1eddng\", \"rau c\u1ee7\"]\n    },\n    \"B\u1eefa tr\u01b0a\": {\n      \"name\": \"S\u01b0\u1eddn heo rim n\u01b0\u1edbc m\u1eafm ti\u00eau\",\n      \"ingredients\": [\"S\u01b0\u1eddn heo\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\", \"\u1edat\", \"T\u1ecfi\", \"\u0110\u01b0\u1eddng\", \"N\u01b0\u1edbc l\u1ecdc\"],\n      \"preparation_time\": 45,\n      \"estimated_cost\": 69000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"n\u01b0\u1edbc m\u1eafm\", \"h\u1ea1t ti\u00eau\", \"\u1edbt\"],\n      \"nutrition_info\": {\n        \"protein\": \"20g\",\n        \"carbs\": \"10g\",\n        \"fat\": \"25g\",\n        \"calories\": \"350 kcal\"\n      },\n      \"cooking_method\": \"H\u1ea7m/ rim\",\n      \"food_groups\": [\"\u0111\u1ea1m\", \"d\u1ea7u b\u00e9o\"]\n    },\n    \"B\u1eefa t\u1ed1i\": {\n      \"name\": \"B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi v\u00e0 c\u1ea3i xoong tr\u1ed9n\",\n      \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"C\u1ea3i xoong\", \"T\u1ecfi\", \"D\u1ea7u \u0103n\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n      \"preparation_time\": 20,\n      \"estimated_cost\": 62000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"t\u1ecfi\", \"n\u01b0\u1edbc m\u1eafm\", \"h\u1ea1t ti\u00eau\"],\n      \"nutrition_info\": {\n        \"protein\": \"4g\",\n        \"carbs\": \"20g\",\n        \"fat\": \"7g\",\n        \"calories\": \"150 kcal\"\n      },\n      \"cooking_method\": \"X\u00e0o\",\n      \"food_groups\": [\"rau c\u1ee7\", \"\u0111\u1ea1m\"]\n    }\n  }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 714,
+    "completion_tokens": 546,
+    "total_tokens": 1260,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
+2025-05-02 15:03:10,991 - api.openai_api - INFO - Generating menu for Thứ tư
+2025-05-02 15:03:10,992 - api.openai_api - INFO - Sending request to OpenAI API
+2025-05-02 15:03:14,390 - api.openai_api - INFO - Raw API Response:
+2025-05-02 15:03:14,390 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSfezKnE0zgcfWhGv9KZkO7y05EQr",
+  "object": "chat.completion",
+  "created": 1746173025,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"Th\u1ee9 t\u01b0\": {\n    \"B\u1eefa s\u00e1ng\": {\n      \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la b\u00ed \u0111\u1ecf\",\n      \"ingredients\": [\"b\u00e1nh m\u00ec\", \"tr\u1ee9ng g\u00e0\", \"b\u00ed \u0111\u1ecf\", \"d\u1ea7u \u0103n\", \"gia v\u1ecb (mu\u1ed1i, ti\u00eau)\"],\n      \"preparation_time\": 20,\n      \"estimated_cost\": 65000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"ti\u00eau v\u00e0 mu\u1ed1i\"],\n      \"nutrition_info\": {\n        \"protein\": \"12g\",\n        \"carbs\": \"40g\",\n        \"fat\": \"15g\",\n        \"calories\": \"350 kcal\"\n      },\n      \"cooking_method\": \"chi\u00ean tr\u1ee9ng v\u00e0 n\u01b0\u1edbng b\u00e1nh m\u00ec\",\n      \"food_groups\": [\"protein\", \"carbohydrate\", \"vegetable\"]\n    },\n    \"B\u1eefa tr\u01b0a\": {\n      \"name\": \"C\u1ea3i xoong x\u00e0o th\u1ecbt ba ch\u1ec9\",\n      \"ingredients\": [\"th\u1ecbt ba ch\u1ec9\", \"c\u1ea3i xoong\", \"t\u1ecfi\", \"d\u1ea7u \u0103n\", \"n\u01b0\u1edbc m\u1eafm\", \"h\u1ea1t ti\u00eau\"],\n      \"preparation_time\": 25,\n      \"estimated_cost\": 68000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"n\u01b0\u1edbc m\u1eafm, ti\u00eau\"],\n      \"nutrition_info\": {\n        \"protein\": \"13g\",\n        \"carbs\": \"8g\",\n        \"fat\": \"20g\",\n        \"calories\": \"280 kcal\"\n      },\n      \"cooking_method\": \"x\u00e0o nhanh v\u1edbi t\u1ecfi v\u00e0 gia v\u1ecb\",\n      \"food_groups\": [\"protein\", \"vegetable\"]\n    },\n    \"B\u1eefa t\u1ed1i\": {\n      \"name\": \"S\u01b0\u1eddn heo rim d\u1ee9a\",\n      \"ingredients\": [\"s\u01b0\u1eddn heo\", \"d\u1ee9a t\u01b0\u01a1i\", \"t\u1ecfi\", \"n\u01b0\u1edbc m\u1eafm\", \"h\u1ea1t ti\u00eau\", \"\u0111\u01b0\u1eddng, d\u1ea7u \u0103n\"],\n      \"preparation_time\": 35,\n      \"estimated_cost\": 69500,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"n\u01b0\u1edbc m\u1eafm, ti\u00eau\"],\n      \"nutrition_info\": {\n        \"protein\": \"16g\",\n        \"carbs\": \"18g\",\n        \"fat\": \"12g\",\n        \"calories\": \"290 kcal\"\n      },\n      \"cooking_method\": \"rim theo ki\u1ec3u mi\u1ec1n Trung, d\u00f9ng d\u1ee9a \u0111\u1ec3 t\u1ea1o v\u1ecb chua, ng\u1ecdt\",\n      \"food_groups\": [\"protein\", \"fruit\"]\n    }\n  }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 786,
+    "completion_tokens": 543,
+    "total_tokens": 1329,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
+2025-05-02 15:03:14,391 - api.openai_api - INFO - Generating menu for Thứ năm
+2025-05-02 15:03:14,391 - api.openai_api - INFO - Sending request to OpenAI API
+2025-05-02 15:03:18,618 - api.openai_api - INFO - Raw API Response:
+2025-05-02 15:03:18,618 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSff2m6eduNkWyCh8o4zlGMpKZWbW",
+  "object": "chat.completion",
+  "created": 1746173028,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"Th\u1ee9 n\u0103m\": {\n    \"B\u1eefa s\u00e1ng\": {\n      \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la b\u00ed \u0111\u1ecf k\u00e8m c\u1ea3i xoong\",\n      \"ingredients\": [\n        \"B\u00ed \u0111\u1ecf\",\n        \"Tr\u1ee9ng g\u00e0\",\n        \"B\u00e1nh m\u00ec\",\n        \"C\u1ea3i xoong\",\n        \"D\u1ea7u \u0103n\",\n        \"N\u01b0\u1edbc m\u1eafm\",\n        \"Ti\u00eau\"\n      ],\n      \"preparation_time\": 20,\n      \"estimated_cost\": 69000,\n      \"servings\": 4,\n      \"reused_ingredients\": [],\n      \"nutrition_info\": {\n        \"protein\": \"12g\",\n        \"carbs\": \"45g\",\n        \"fat\": \"20g\",\n        \"calories\": \"380kcal\"\n      },\n      \"cooking_method\": \"Chi\u00ean (tr\u1ee9ng, b\u00ed \u0111\u1ecf), n\u01b0\u1edbng b\u00e1nh m\u00ec, x\u00e0o c\u1ea3i xoong\",\n      \"food_groups\": [\"protein\", \"carbohydrate\", \"vegetables\", \"dairy\"]\n    },\n    \"B\u1eefa tr\u01b0a\": {\n      \"name\": \"S\u01b0\u1eddn heo rim d\u1ee9a\",\n      \"ingredients\": [\n        \"S\u01b0\u1eddn heo\",\n        \"D\u1ee9a\",\n        \"N\u01b0\u1edbc m\u1eafm\",\n        \"H\u1ea1t ti\u00eau\",\n        \"T\u1ecfi (t\u00f9y ch\u1ecdn, n\u1ebfu kh\u00f4ng th\u00edch h\u00e0nh l\u00e1)\"\n      ],\n      \"preparation_time\": 45,\n      \"estimated_cost\": 69000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n      \"nutrition_info\": {\n        \"protein\": \"25g\",\n        \"carbs\": \"15g\",\n        \"fat\": \"18g\",\n        \"calories\": \"330kcal\"\n      },\n      \"cooking_method\": \"X\u00e0o v\u00e0 rim\",\n      \"food_groups\": [\"protein\", \"fruit\", \"fat\"]\n    },\n    \"B\u1eefa t\u1ed1i\": {\n      \"name\": \"Canh b\u00ed \u0111\u1ecf t\u00f4m s\u00fa\",\n      \"ingredients\": [\n        \"B\u00ed \u0111\u1ecf\",\n        \"T\u00f4m s\u00fa\",\n        \"N\u01b0\u1edbc m\u1eafm\",\n        \"Ti\u00eau\",\n        \"C\u1ea3i xoong\"\n      ],\n      \"preparation_time\": 30,\n      \"estimated_cost\": 69000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"Ti\u00eau\", \"C\u1ea3i xoong\"],\n      \"nutrition_info\": {\n        \"protein\": \"15g\",\n        \"carbs\": \"20g\",\n        \"fat\": \"4g\",\n        \"calories\": \"150kcal\"\n      },\n      \"cooking_method\": \"H\u1ea7m/lu\u1ed9c\",\n      \"food_groups\": [\"protein\", \"vegetables\", \"soup\"]\n    }\n  }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 850,
+    "completion_tokens": 586,
+    "total_tokens": 1436,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
+2025-05-02 15:03:18,618 - api.openai_api - INFO - Generating menu for Thứ sáu
+2025-05-02 15:03:18,620 - api.openai_api - INFO - Sending request to OpenAI API
+2025-05-02 15:03:22,471 - api.openai_api - INFO - Raw API Response:
+2025-05-02 15:03:22,471 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSff73lJZ7UY5PP4xQn4HvlYnJJMX",
+  "object": "chat.completion",
+  "created": 1746173033,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"Th\u1ee9 s\u00e1u\": {\n    \"B\u1eefa s\u00e1ng\": {\n      \"name\": \"Tr\u1ee9ng chi\u00ean b\u00ed \u0111\u1ecf v\u00e0 c\u1ea3i xoong\",\n      \"ingredients\": [\n        \"Tr\u1ee9ng g\u00e0\",\n        \"B\u00ed \u0111\u1ecf\",\n        \"C\u1ea3i xoong\",\n        \"D\u1ea7u \u0103n\",\n        \"Gia v\u1ecb: mu\u1ed1i, ti\u00eau\"\n      ],\n      \"preparation_time\": 15,\n      \"estimated_cost\": 65000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"tr\u1ee9ng g\u00e0\", \"b\u00ed \u0111\u1ecf\", \"c\u1ea3i xoong\"],\n      \"nutrition_info\": {\n        \"protein\": \"12g\",\n        \"carbs\": \"20g\",\n        \"fat\": \"15g\",\n        \"calories\": \"250 kcal\"\n      },\n      \"cooking_method\": \"X\u00e0o v\u00e0 chi\u00ean\",\n      \"food_groups\": [\"Protein\", \"rau c\u1ee7\"]\n    },\n    \"B\u1eefa tr\u01b0a\": {\n      \"name\": \"S\u01b0\u1eddn heo rim n\u01b0\u1edbc m\u1eafm ti\u00eau\",\n      \"ingredients\": [\n        \"S\u01b0\u1eddn heo\",\n        \"N\u01b0\u1edbc m\u1eafm\",\n        \"Ti\u00eau\",\n        \"T\u1ecfi\",\n        \"\u0110\u01b0\u1eddng\",\n        \"N\u01b0\u1edbc l\u1ecdc\"\n      ],\n      \"preparation_time\": 40,\n      \"estimated_cost\": 70000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"s\u01b0\u1eddn heo\"],\n      \"nutrition_info\": {\n        \"protein\": \"18g\",\n        \"carbs\": \"5g\",\n        \"fat\": \"12g\",\n        \"calories\": \"220 kcal\"\n      },\n      \"cooking_method\": \"H\u1ea7m v\u00e0 rim\",\n      \"food_groups\": [\"Protein\", \"D\u1ea7u m\u1ee1\"]\n    },\n    \"B\u1eefa t\u1ed1i\": {\n      \"name\": \"Th\u1ecbt kho t\u00e0u v\u1edbi b\u00ed \u0111\u1ecf\",\n      \"ingredients\": [\n        \"Th\u1ecbt ba ch\u1ec9\",\n        \"Tr\u1ee9ng g\u00e0\",\n        \"N\u01b0\u1edbc m\u1eafm\",\n        \"Ti\u00eau\",\n        \"T\u1ecfi\",\n        \"B\u00ed \u0111\u1ecf\",\n        \"Gia v\u1ecb: mu\u1ed1i, \u0111\u01b0\u1eddng\"\n      ],\n      \"preparation_time\": 50,\n      \"estimated_cost\": 70000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"th\u1ecbt ba ch\u1ec9\", \"tr\u1ee9ng g\u00e0\", \"b\u00ed \u0111\u1ecf\"],\n      \"nutrition_info\": {\n        \"protein\": \"20g\",\n        \"carbs\": \"25g\",\n        \"fat\": \"18g\",\n        \"calories\": \"330 kcal\"\n      },\n      \"cooking_method\": \"H\u1ea7m v\u00e0 kho\",\n      \"food_groups\": [\"Protein\", \"rau c\u1ee7\", \"D\u1ea7u m\u1ee1\"]\n    }\n  }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 920,
+    "completion_tokens": 573,
+    "total_tokens": 1493,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
+2025-05-02 15:03:22,472 - api.openai_api - INFO - Generating menu for Thứ bảy
+2025-05-02 15:03:22,472 - api.openai_api - INFO - Sending request to OpenAI API
+2025-05-02 15:03:25,969 - api.openai_api - INFO - Raw API Response:
+2025-05-02 15:03:25,969 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSffBW0oi6sm8GcoHo4o93ZI70KWZ",
+  "object": "chat.completion",
+  "created": 1746173037,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"Th\u1ee9 b\u1ea3y\": {\n    \"B\u1eefa s\u00e1ng\": {\n      \"name\": \"Tr\u1ee9ng g\u00e0 h\u1ea5p b\u00ed \u0111\u1ecf v\u00e0 c\u1ea3i xoong\",\n      \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"C\u1ea3i xoong\", \"N\u01b0\u1edbc m\u1eafm\", \"Ti\u00eau\"],\n      \"preparation_time\": 20,\n      \"estimated_cost\": 65000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"Ti\u00eau\"],\n      \"nutrition_info\": {\n        \"protein\": \"12g\",\n        \"carbs\": \"15g\",\n        \"fat\": \"10g\",\n        \"calories\": \"200kcal\"\n      },\n      \"cooking_method\": \"H\u1ea5p\",\n      \"food_groups\": [\"Protein\", \"Vegetables\"]\n    },\n    \"B\u1eefa tr\u01b0a\": {\n      \"name\": \"Th\u1ecbt kho t\u00e0u b\u00ed \u0111\u1ecf\",\n      \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"N\u01b0\u1edbc m\u1eafm\", \"Ti\u00eau\"],\n      \"preparation_time\": 50,\n      \"estimated_cost\": 70000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"Ti\u00eau\"],\n      \"nutrition_info\": {\n        \"protein\": \"15g\",\n        \"carbs\": \"20g\",\n        \"fat\": \"18g\",\n        \"calories\": \"300kcal\"\n      },\n      \"cooking_method\": \"H\u1ea7m kho\",\n      \"food_groups\": [\"Protein\", \"Vegetables\"]\n    },\n    \"B\u1eefa t\u1ed1i\": {\n      \"name\": \"S\u01b0\u1eddn heo rim d\u1ee9a\",\n      \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"Ti\u00eau\"],\n      \"preparation_time\": 45,\n      \"estimated_cost\": 68000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"Ti\u00eau\"],\n      \"nutrition_info\": {\n        \"protein\": \"17g\",\n        \"carbs\": \"22g\",\n        \"fat\": \"12g\",\n        \"calories\": \"250kcal\"\n      },\n      \"cooking_method\": \"rim\",\n      \"food_groups\": [\"Protein\", \"Fruits\"]\n    }\n  }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 982,
+    "completion_tokens": 496,
+    "total_tokens": 1478,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
+2025-05-02 15:03:25,970 - api.openai_api - INFO - Generating menu for Chủ nhật
+2025-05-02 15:03:25,971 - api.openai_api - INFO - Sending request to OpenAI API
+2025-05-02 15:03:29,248 - api.openai_api - INFO - Raw API Response:
+2025-05-02 15:03:29,248 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSffE9RDqU1FlUc7reCMAMcvee39m",
+  "object": "chat.completion",
+  "created": 1746173040,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"Ch\u1ee7 nh\u1eadt\": {\n    \"B\u1eefa s\u00e1ng\": {\n      \"name\": \"Tr\u1ee9ng g\u00e0 m\u1ec1m x\u00e0o b\u00ed \u0111\u1ecf t\u1ecfi\",\n      \"ingredients\": [\n        \"Tr\u1ee9ng g\u00e0 x 4 qu\u1ea3\",\n        \"B\u00ed \u0111\u1ecf x\u1eaft l\u00e1t nh\u1ecf x 300g\",\n        \"T\u1ecfi b\u0103m\",\n        \"D\u1ea7u \u0103n\"\n      ],\n      \"preparation_time\": 20,\n      \"estimated_cost\": 55000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"d\u1ea7u \u0103n\"],\n      \"nutrition_info\": {\n        \"protein\": \"14g\",\n        \"carbs\": \"30g\",\n        \"fat\": \"12g\",\n        \"calories\": \"280 kcal\"\n      },\n      \"cooking_method\": \"X\u00e0o\",\n      \"food_groups\": [\"Protein\", \"Carbohydrates\", \"Vegetables\"]\n    },\n    \"B\u1eefa tr\u01b0a\": {\n      \"name\": \"Th\u1ecbt kho t\u00e0u b\u00ed \u0111\u1ecf\",\n      \"ingredients\": [\n        \"Th\u1ecbt ba ch\u1ec9 300g\",\n        \"B\u00ed \u0111\u1ecf x\u1eaft kh\u1ed1i 200g\",\n        \"N\u01b0\u1edbc m\u1eafm, ti\u00eau\",\n        \"H\u00e0nh t\u00edm\",\n        \"D\u1ea7u \u0103n\"\n      ],\n      \"preparation_time\": 45,\n      \"estimated_cost\": 69000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"d\u1ea7u \u0103n\", \"n\u01b0\u1edbc m\u1eafm\"],\n      \"nutrition_info\": {\n        \"protein\": \"16g\",\n        \"carbohydrates\": \"20g\",\n        \"fat\": \"25g\",\n        \"calories\": \"350 kcal\"\n      },\n      \"cooking_method\": \"H\u1ea7m kho\",\n      \"food_groups\": [\"Protein\", \"Vegetables\", \"Fats\"]\n    },\n    \"B\u1eefa t\u1ed1i\": {\n      \"name\": \"S\u01b0\u1eddn heo rim d\u1ee9a v\u00e0 c\u01a1m tr\u1eafng\",\n      \"ingredients\": [\n        \"S\u01b0\u1eddn heo 300g\",\n        \"D\u1ee9a t\u01b0\u01a1i ho\u1eb7c \u0111\u00f3ng h\u1ed9p 150g\",\n        \"N\u01b0\u1edbc m\u1eafm, ti\u00eau, t\u1ecfi\",\n        \"C\u01a1m tr\u1eafng\"\n      ],\n      \"preparation_time\": 50,\n      \"estimated_cost\": 68000,\n      \"servings\": 4,\n      \"reused_ingredients\": [\"n\u01b0\u1edbc m\u1eafm\", \"ti\u00eau\", \"t\u1ecfi\"],\n      \"nutrition_info\": {\n        \"protein\": \"20g\",\n        \"carbohydrates\": \"45g\",\n        \"fat\": \"10g\",\n        \"calories\": \"420 kcal\"\n      },\n      \"cooking_method\": \"N\u1ea5u rim\",\n      \"food_groups\": [\"Protein\", \"Fruits\", \"Carbohydrates\"]\n    }\n  }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1037,
+    "completion_tokens": 574,
+    "total_tokens": 1611,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
