@@ -74,35 +74,12 @@ class OpenAIWrapper(QObject):
                     
                     try:
                         return json.loads(content)
-                    except json.JSONDecodeError as je:
-                        logger.error(f"JSON parsing error after cleaning: {str(je)}")
-                        # Try to fix common JSON formatting issues
-                        content = content.replace("'", '"')  # Replace single quotes with double quotes
-                        content = content.replace(",}", "}")  # Remove trailing commas
-                        content = content.replace(",]", "]")  # Remove trailing commas in arrays
-                        
-                        try:
-                            return json.loads(content)
-                        except json.JSONDecodeError:
-                            # Additional fallback - create a minimal valid structure
-                            logger.error("All JSON parsing attempts failed. Creating fallback structure.")
-                            if "recipe" in content.lower():
-                                return {
-                                    "recipe": {
-                                        "name": "Unknown recipe",
-                                        "ingredients": ["Could not parse ingredients"],
-                                        "steps": ["Could not parse preparation steps"],
-                                        "error": "Invalid JSON format in original response"
-                                    }
-                                }
-                            else:
-                                return {"error": "Invalid JSON format in response"}
-                else:
-                    logger.error("No valid JSON object found in response")
-                    return {"error": "No valid JSON object found in response"}
+                    except json.JSONDecoder as je:
+                        logger.error(f"Failed to parse cleaned JSON: {str(je)}")
+                        return None
             except Exception as e:
-                logger.error(f"JSON parsing error after all cleaning attempts: {str(e)}")
-                return {"error": "Invalid JSON format in response"}
+                logger.error(f"Error cleaning JSON: {str(e)}")
+                return None
     
     def _create_menu_prompt(self, user_preferences, cuisine_type, 
                            budget_per_meal, max_prep_time, days, 
@@ -110,15 +87,17 @@ class OpenAIWrapper(QObject):
         """Create a prompt for the OpenAI API to generate a menu."""
         
         # Base prompt with user preferences - optimized for token usage
-        prompt = f"""Bạn là một đầu bếp chuyên nghiệp với kiến thức sâu rộng về dinh dưỡng và ẩm thực. 
-Hãy tạo một thực đơn hàng tuần đa dạng, hấp dẫn và đầy đủ chất dinh dưỡng với các yêu cầu sau:
+        prompt = f"""Bạn là một đầu bếp chuyên nghiệp với kiến thức sâu rộng về ẩm thực {cuisine_type}. 
+Hãy tạo một thực đơn hàng tuần phù hợp với văn hóa ẩm thực đã chọn, đảm bảo các yêu cầu sau:
 
-1. Mỗi ngày phải có thực đơn khác nhau, không lặp lại món ăn trong tuần
-2. Các món ăn phải cân bằng dinh dưỡng (đạm, tinh bột, chất béo, vitamin)
-3. Kết hợp nhiều phương pháp chế biến (xào, hấp, luộc, nướng, chiên)
-4. Sử dụng nguyên liệu tươi, theo mùa
-5. Đảm bảo mỗi bữa có đủ 4 nhóm thực phẩm chính
-6. Các món ăn phải hấp dẫn, ngon miệng và dễ ăn
+1. Tất cả các món ăn PHẢI là những món ăn thực tế, phổ biến và tồn tại trong nền ẩm thực {cuisine_type}
+2. KHÔNG được tạo ra hoặc kết hợp các món ăn không tồn tại trong thực tế
+3. Mỗi ngày phải có thực đơn khác nhau, không lặp lại món ăn trong tuần
+4. Các món ăn phải cân bằng dinh dưỡng (đạm, tinh bột, chất béo, vitamin)
+5. Kết hợp nhiều phương pháp chế biến phù hợp với văn hóa ẩm thực đã chọn
+6. Sử dụng nguyên liệu phổ biến, dễ tìm tại Việt Nam
+7. Đảm bảo chi phí và thời gian nấu nướng nằm trong giới hạn cho phép
+8. Trước khi đề xuất món ăn, hãy kiểm tra xem món đó có thực sự tồn tại và phổ biến trong nền ẩm thực đã chọn không
 
 Thông tin chi tiết:
 Ngày: {', '.join(days)}
@@ -146,8 +125,8 @@ Format JSON:
   "menu": {
     "Ngày": {
       "Bữa": {
-        "name": "tên món",
-        "ingredients": ["nguyên liệu"],
+        "name": "tên món (phải là món ăn thực tế, phổ biến)",
+        "ingredients": ["nguyên liệu phổ biến, dễ tìm"],
         "preparation_time": phút,
         "estimated_cost": đồng,
         "servings": số người,
@@ -158,7 +137,7 @@ Format JSON:
           "fat": "g",
           "calories": "kcal"
         },
-        "cooking_method": "phương pháp nấu",
+        "cooking_method": "phương pháp nấu phù hợp với văn hóa ẩm thực",
         "food_groups": ["nhóm thực phẩm"]
       }
     }
@@ -171,68 +150,6 @@ Format JSON:
         logger.info(prompt)
         
         return prompt
-
-    def generate_weekly_menu(self, user_preferences, cuisine_type, 
-                             budget_per_meal, max_prep_time, days, meals_per_day,
-                             servings=4, previous_meals=None) -> Dict[str, Any]:
-        """Generate a weekly menu based on user preferences."""
-        try:
-            # Initial progress notification
-            self.progress_signal.emit("Bắt đầu tạo thực đơn tuần...")
-            
-            # Generate menu day by day
-            menu = {"menu": {}}
-            
-            # Keep track of dishes already generated to avoid repetition
-            generated_dishes = []
-            
-            # Map day numbers to Vietnamese names for display
-            day_names = {
-                "Thứ hai": "Thứ Hai", 
-                "Thứ ba": "Thứ Ba", 
-                "Thứ tư": "Thứ Tư",
-                "Thứ năm": "Thứ Năm", 
-                "Thứ sáu": "Thứ Sáu", 
-                "Thứ bảy": "Thứ Bảy",
-                "Chủ nhật": "Chủ Nhật"
-            }
-            
-            for day in days:
-                # Emit detailed progress signal with proper formatting
-                display_day = day_names.get(day, day)
-                self.progress_signal.emit(f"Đang tạo thực đơn cho {display_day}...")
-                
-                logger.info(f"Generating menu for {day}")
-                day_menu = self._generate_daily_menu(
-                    user_preferences, cuisine_type, budget_per_meal,
-                    max_prep_time, day, meals_per_day, servings, previous_meals,
-                    generated_dishes
-                )
-                if "error" in day_menu:
-                    return day_menu
-                
-                # Handle both array and object responses
-                if isinstance(day_menu.get(day, {}).get("Bữa"), list):
-                    # Convert array format to object format
-                    meals_dict = {}
-                    for meal in day_menu[day]["Bữa"]:
-                        meal_name = meal["name"].split(" - ")[0].strip()  # Extract meal time
-                        meals_dict[meal_name] = meal
-                    menu["menu"][day] = meals_dict
-                else:
-                    menu["menu"][day] = day_menu.get(day, {})
-                
-                # Add this day's dishes to the list of generated dishes
-                for meal_time, meal_info in menu["menu"][day].items():
-                    generated_dishes.append(meal_info["name"])
-            
-            # Signal completion
-            self.progress_signal.emit("Đã hoàn thành tạo thực đơn tuần!")
-            return menu
-            
-        except Exception as e:
-            logger.error(f"Error in generate_weekly_menu: {str(e)}")
-            return {"error": str(e)}
     
     def _generate_daily_menu(self, user_preferences, cuisine_type,
                            budget_per_meal, max_prep_time, day,
@@ -242,10 +159,16 @@ Format JSON:
         if generated_dishes is None:
             generated_dishes = []
         
-        prompt = f"""Tạo một thực đơn cho {day} với các bữa: {', '.join(meals_per_day)}.
-Mỗi món ăn phải cân bằng dinh dưỡng và phù hợp với yêu cầu thực đơn tuần.
+        prompt = f"""Với vai trò là một đầu bếp chuyên về {cuisine_type}, hãy tạo thực đơn cho {day} với các yêu cầu sau:
+
+1. Tất cả các món ăn PHẢI là những món ăn thực tế, phổ biến và tồn tại trong nền ẩm thực {cuisine_type}
+2. KHÔNG được tạo ra hoặc kết hợp các món ăn không tồn tại trong thực tế
+3. Sử dụng nguyên liệu phổ biến, dễ tìm tại Việt Nam
+4. Đảm bảo chi phí và thời gian nấu nướng nằm trong giới hạn
+5. Trước khi đề xuất món ăn, hãy kiểm tra xem món đó có thực sự tồn tại và phổ biến trong nền ẩm thực đã chọn không
 
 Thông tin chi tiết:
+Các bữa: {', '.join(meals_per_day)}
 Số người ăn: {servings} người
 Thích: {', '.join(user_preferences.favorite_ingredients) if user_preferences.favorite_ingredients else 'Không'}
 Không thích: {', '.join(user_preferences.disliked_ingredients) if user_preferences.disliked_ingredients else 'Không'}
@@ -264,8 +187,8 @@ Format JSON:
         # Add format for each meal
         for meal in meals_per_day:
             prompt += f"""    "{meal}": {{
-      "name": "tên món",
-      "ingredients": ["nguyên liệu 1", "nguyên liệu 2"],
+      "name": "tên món (phải là món ăn thực tế, phổ biến)",
+      "ingredients": ["nguyên liệu phổ biến, dễ tìm"],
       "preparation_time": phút,
       "estimated_cost": đồng,
       "servings": {servings},
@@ -276,7 +199,7 @@ Format JSON:
         "fat": "g",
         "calories": "kcal"
       }},
-      "cooking_method": "phương pháp nấu",
+      "cooking_method": "phương pháp nấu phù hợp với văn hóa ẩm thực",
       "food_groups": ["nhóm thực phẩm"]
     }},
 """
@@ -307,50 +230,50 @@ Format JSON:
         cuisine_str = f" theo phong cách {cuisine_type}" if cuisine_type else ""
         
         # Create prompt with proper formatting
-        prompt = f"Hãy cung cấp công thức chi tiết để nấu món {dish_name}{cuisine_str} cho {servings} người theo format JSON sau.\n"
-        prompt += "Chú ý: Đảm bảo rằng tất cả các giá trị số (thời gian, khẩu phần) phải là số nguyên, không phải chuỗi.\n\n"
-        prompt += f"""
+        prompt = f"""Với vai trò là một đầu bếp chuyên về {cuisine_type}, hãy cung cấp công thức chi tiết cho món {dish_name} cho {servings} người.
+
+Yêu cầu:
+1. Đảm bảo đây là một món ăn thực tế, phổ biến trong nền ẩm thực {cuisine_type}
+2. Sử dụng nguyên liệu phổ biến, dễ tìm tại Việt Nam
+3. Hướng dẫn chi tiết các bước thực hiện
+4. Tất cả các giá trị số (thời gian, khối lượng) phải là số nguyên
+5. Đảm bảo định lượng nguyên liệu phù hợp cho {servings} người ăn
+
+Format JSON:
 {{
   "recipe": {{
     "name": "tên món ăn",
-    "cuisine_type": "loại ẩm thực",
+    "cuisine_type": "{cuisine_type}",
     "ingredients": [
       {{
         "item": "tên nguyên liệu",
-        "amount": "số lượng",
+        "amount": số lượng,
         "unit": "đơn vị"
       }}
     ],
     "steps": [
       {{
         "step": 1,
-        "description": "mô tả bước thực hiện"
+        "description": "mô tả chi tiết cách thực hiện"
       }}
     ],
-    "preparation_time": 30,
-    "cooking_time": 45,
+    "preparation_time": thời gian chuẩn bị (phút),
+    "cooking_time": thời gian nấu (phút),
     "servings": {servings},
     "difficulty": "độ khó (dễ/trung bình/khó)"
   }}
-}}
-
-Lưu ý quan trọng: 
-1. Bạn PHẢI trả về JSON hợp lệ
-2. Tất cả các giá trị số như preparation_time, cooking_time, servings, và step phải là số nguyên, KHÔNG phải chuỗi
-3. Đảm bảo đúng định dạng và không có lỗi cú pháp JSON
-4. Nguyên liệu phải được tính toán chính xác cho {servings} người ăn
-"""
+}}"""
         
         try:
             logger.info(f"Sending recipe request to OpenAI API with model: {self.model}")
             response = openai.ChatCompletion.create(
                 model=self.model,
                 messages=[
-                    {"role": "system", "content": "Bạn là một đầu bếp chuyên nghiệp, cung cấp công thức nấu ăn chi tiết. Phản hồi của bạn phải ở định dạng JSON theo mẫu được cung cấp."},
+                    {"role": "system", "content": f"Bạn là một đầu bếp chuyên nghiệp về ẩm thực {cuisine_type}, cung cấp công thức nấu ăn chi tiết và chính xác. Phản hồi của bạn phải ở định dạng JSON theo mẫu được cung cấp."},
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.5,
-                max_tokens=800,
+                max_tokens=1000,
                 response_format={"type": "json_object"}  # Force JSON response format
             )
             
@@ -362,48 +285,12 @@ Lưu ý quan trọng:
             content = response.choices[0].message['content']
             result = self._parse_json_response(content)
             
-            # Validate and fix numeric values
-            if "recipe" in result:
-                recipe = result["recipe"]
-                # Convert preparation_time to int
-                if "preparation_time" in recipe:
-                    try:
-                        recipe["preparation_time"] = int(recipe["preparation_time"])
-                    except (ValueError, TypeError):
-                        recipe["preparation_time"] = 30
-                
-                # Convert cooking_time to int
-                if "cooking_time" in recipe:
-                    try:
-                        recipe["cooking_time"] = int(recipe["cooking_time"])
-                    except (ValueError, TypeError):
-                        recipe["cooking_time"] = 45
-                
-                # Convert servings to int
-                if "servings" in recipe:
-                    try:
-                        recipe["servings"] = int(recipe["servings"])
-                    except (ValueError, TypeError):
-                        recipe["servings"] = 2
-                
-                # Ensure steps have integer step numbers
-                if "steps" in recipe and isinstance(recipe["steps"], list):
-                    for i, step in enumerate(recipe["steps"]):
-                        if isinstance(step, dict) and "step" in step:
-                            try:
-                                step["step"] = int(step["step"])
-                            except (ValueError, TypeError):
-                                step["step"] = i + 1
-            
-            # Signal completion
-            self.progress_signal.emit(f"Đã hoàn thành tạo công thức cho món {dish_name}!")
-            
             return result
             
         except Exception as e:
-            logger.error(f"Error in generate_recipe: {str(e)}")
-            return {"error": str(e)}
-
+            logger.error(f"Error generating recipe: {str(e)}")
+            return None
+    
     def _refresh_api_key(self):
         """Refresh API key from manager."""
         self.api_key = get_api_key()
@@ -417,10 +304,14 @@ Lưu ý quan trọng:
             response = openai.ChatCompletion.create(
                 model=self.model,
                 messages=[
-                    {"role": "system", "content": "You are a professional chef with extensive knowledge of nutrition and cuisine."},
+                    {"role": "system", "content": "Bạn là một đầu bếp chuyên nghiệp với kiến thức sâu rộng về ẩm thực. Hãy đảm bảo chỉ đề xuất những món ăn thực tế, phổ biến và phù hợp với văn hóa ẩm thực được chọn."},
                     {"role": "user", "content": prompt}
-                ]
+                ],
+                temperature=0.7,
+                max_tokens=2000,
+                response_format={"type": "json_object"}  # Force JSON response format
             )
+            
             logger.info("Raw API Response:")
             logger.info(response)
             
@@ -497,4 +388,31 @@ Lưu ý quan trọng:
             
         except Exception as e:
             logger.error(f"Error getting recipe: {str(e)}")
-            return None 
+            return None
+    
+    def generate_weekly_menu(self, user_preferences, cuisine_type, 
+                              budget_per_meal, max_prep_time, days, meals_per_day,
+                              servings=4, previous_meals=None) -> Dict[str, Any]:
+        """Generate a weekly menu based on user preferences."""
+        try:
+            self.progress_signal.emit("Bắt đầu tạo thực đơn tuần...")
+            menu = {"menu": {}}
+            generated_dishes = []
+            for day in days:
+                self.progress_signal.emit(f"Đang tạo thực đơn cho {day}...")
+                day_menu = self._generate_daily_menu(
+                    user_preferences, cuisine_type, budget_per_meal,
+                    max_prep_time, day, meals_per_day, servings, previous_meals,
+                    generated_dishes
+                )
+                if "error" in day_menu:
+                    return day_menu
+                menu["menu"][day] = day_menu.get(day, {})
+                for meal_time, meal_info in menu["menu"][day].items():
+                    if isinstance(meal_info, dict) and "name" in meal_info:
+                        generated_dishes.append(meal_info["name"])
+            self.progress_signal.emit("Đã hoàn thành tạo thực đơn tuần!")
+            return menu
+        except Exception as e:
+            logger.error(f"Error in generate_weekly_menu: {str(e)}")
+            return {"error": str(e)} 

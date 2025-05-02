@@ -8,12 +8,16 @@ from utils.api_key_manager import get_api_key
 # Load environment variables from .env file
 load_dotenv()
 
+# Get AppData path for Windows
+APP_DATA = os.path.join(os.getenv('APPDATA') or os.path.expanduser('~'), 'LenThucDonTuan')
+os.makedirs(APP_DATA, exist_ok=True)
+
 # OpenAI API configuration
 OPENAI_API_KEY = get_api_key()
-OPENAI_MODEL = "gpt-4.1-nano"
+OPENAI_MODEL = "gpt-4.1-mini-2025-04-14"  # Sử dụng model mới nhất và tốt nhất
 
 # Database configuration
-DATABASE_PATH = os.path.join(os.path.dirname(__file__), 'data.db')
+DATABASE_PATH = os.path.join(APP_DATA, 'data.db')
 
 # UI configuration
 APP_NAME = "Lên Thực Đơn Tuần"
