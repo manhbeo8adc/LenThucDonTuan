@@ -48,10 +48,28 @@ class CuisinePanel(QWidget):
         
         self.cuisine_button_group = QButtonGroup(self)
         
+        # Style for radio buttons
+        radio_button_style = """
+            QRadioButton {
+                font-size: 12pt;
+                padding: 6px;
+                spacing: 8px; /* Space between radio button and text */
+            }
+            QRadioButton::indicator {
+                width: 16px;
+                height: 16px;
+            }
+            QRadioButton:hover {
+                background-color: #FFF0F5;
+                border-radius: 4px;
+            }
+        """
+        
         # Add cuisine options
         for cuisine in CUISINE_TYPES:
             radio_button = QRadioButton(cuisine)
             radio_button.setProperty("cuisine", cuisine)
+            radio_button.setStyleSheet(radio_button_style)
             self.cuisine_button_group.addButton(radio_button)
             cuisine_layout.addWidget(radio_button)
         
@@ -125,6 +143,11 @@ class CuisinePanel(QWidget):
         """Emit signal to indicate the cuisine is selected."""
         if self.selected_cuisine:
             self.cuisine_selected.emit(self.selected_cuisine)
+            
+            # Get the main window to show toast notification
+            main_window = self.window()
+            if hasattr(main_window, 'show_toast'):
+                main_window.show_toast(f"Đã chọn phong cách: {self.selected_cuisine}")
     
     def _get_cuisine_details(self, cuisine):
         """Get details for a specific cuisine."""

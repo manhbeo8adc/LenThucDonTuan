@@ -7,7 +7,8 @@ import logging
 from typing import Dict, Any, Optional
 import openai
 from PyQt5.QtCore import QObject, pyqtSignal
-from config import OPENAI_API_KEY, OPENAI_MODEL
+from config import OPENAI_MODEL
+from utils.api_key_manager import get_api_key
 
 # Configure logging
 log_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app.log')
@@ -27,11 +28,13 @@ class OpenAIWrapper(QObject):
     # Signal to notify progress
     progress_signal = pyqtSignal(str)
     
-    def __init__(self, api_key=OPENAI_API_KEY, model=OPENAI_MODEL):
+    def __init__(self, model=OPENAI_MODEL):
         """Initialize OpenAI client with API key."""
         super().__init__()
-        self.api_key = api_key
         self.model = model
+        self.api_key = get_api_key()
+        if not self.api_key:
+            raise ValueError("OpenAI API key not found")
         openai.api_key = self.api_key
     
     def _parse_json_response(self, content: str) -> Dict[str, Any]:
@@ -103,7 +106,7 @@ class OpenAIWrapper(QObject):
     
     def _create_menu_prompt(self, user_preferences, cuisine_type, 
                            budget_per_meal, max_prep_time, days, 
-                           meals_per_day, previous_meals=None):
+                           meals_per_day, servings=4, previous_meals=None):
         """Create a prompt for the OpenAI API to generate a menu."""
         
         # Base prompt with user preferences - optimized for token usage
@@ -120,6 +123,7 @@ Hãy tạo một thực đơn hàng tuần đa dạng, hấp dẫn và đầy đ
 Thông tin chi tiết:
 Ngày: {', '.join(days)}
 Bữa: {', '.join(meals_per_day)}
+Số người ăn: {servings} người
 Thích: {', '.join(user_preferences.favorite_ingredients) if user_preferences.favorite_ingredients else 'Không'}
 Không thích: {', '.join(user_preferences.disliked_ingredients) if user_preferences.disliked_ingredients else 'Không'}
 Món thích: {', '.join(user_preferences.favorite_dishes) if user_preferences.favorite_dishes else 'Không'}
@@ -146,6 +150,7 @@ Format JSON:
         "ingredients": ["nguyên liệu"],
         "preparation_time": phút,
         "estimated_cost": đồng,
+        "servings": số người,
         "reused_ingredients": ["tái sử dụng"],
         "nutrition_info": {
           "protein": "g",
@@ -169,23 +174,38 @@ Format JSON:
 
     def generate_weekly_menu(self, user_preferences, cuisine_type, 
                              budget_per_meal, max_prep_time, days, meals_per_day,
-                             previous_meals=None) -> Dict[str, Any]:
+                             servings=4, previous_meals=None) -> Dict[str, Any]:
         """Generate a weekly menu based on user preferences."""
         try:
+            # Initial progress notification
+            self.progress_signal.emit("Bắt đầu tạo thực đơn tuần...")
+            
             # Generate menu day by day
             menu = {"menu": {}}
             
             # Keep track of dishes already generated to avoid repetition
             generated_dishes = []
             
+            # Map day numbers to Vietnamese names for display
+            day_names = {
+                "Thứ hai": "Thứ Hai", 
+                "Thứ ba": "Thứ Ba", 
+                "Thứ tư": "Thứ Tư",
+                "Thứ năm": "Thứ Năm", 
+                "Thứ sáu": "Thứ Sáu", 
+                "Thứ bảy": "Thứ Bảy",
+                "Chủ nhật": "Chủ Nhật"
+            }
+            
             for day in days:
-                # Emit progress signal
-                self.progress_signal.emit(f"Đang tạo thực đơn cho {day}...")
+                # Emit detailed progress signal with proper formatting
+                display_day = day_names.get(day, day)
+                self.progress_signal.emit(f"Đang tạo thực đơn cho {display_day}...")
                 
                 logger.info(f"Generating menu for {day}")
                 day_menu = self._generate_daily_menu(
                     user_preferences, cuisine_type, budget_per_meal,
-                    max_prep_time, day, meals_per_day, previous_meals,
+                    max_prep_time, day, meals_per_day, servings, previous_meals,
                     generated_dishes
                 )
                 if "error" in day_menu:
@@ -207,7 +227,7 @@ Format JSON:
                     generated_dishes.append(meal_info["name"])
             
             # Signal completion
-            self.progress_signal.emit("Đã hoàn thành tạo thực đơn!")
+            self.progress_signal.emit("Đã hoàn thành tạo thực đơn tuần!")
             return menu
             
         except Exception as e:
@@ -216,57 +236,39 @@ Format JSON:
     
     def _generate_daily_menu(self, user_preferences, cuisine_type,
                            budget_per_meal, max_prep_time, day,
-                           meals_per_day, previous_meals=None, 
+                           meals_per_day, servings, previous_meals=None, 
                            generated_dishes=None) -> Dict[str, Any]:
         """Generate menu for a single day."""
-        # Initialize generated_dishes if None
         if generated_dishes is None:
             generated_dishes = []
         
-        prompt = f"""Bạn là một đầu bếp chuyên nghiệp với kiến thức sâu rộng về dinh dưỡng và ẩm thực. 
-Hãy tạo thực đơn cho {day} với các yêu cầu sau:
-
-1. Thực đơn phải khác biệt với các ngày khác trong tuần
-2. Các món ăn phải cân bằng dinh dưỡng (đạm, tinh bột, chất béo, vitamin)
-3. Kết hợp nhiều phương pháp chế biến (xào, hấp, luộc, nướng, chiên)
-4. Sử dụng nguyên liệu tươi, theo mùa
-5. Đảm bảo mỗi bữa có đủ 4 nhóm thực phẩm chính
-6. Các món ăn phải hấp dẫn, ngon miệng và dễ ăn
-7. KHÔNG ĐƯỢC lặp lại những món ăn đã có trong thực đơn các ngày trước
+        prompt = f"""Tạo một thực đơn cho {day} với các bữa: {', '.join(meals_per_day)}.
+Mỗi món ăn phải cân bằng dinh dưỡng và phù hợp với yêu cầu thực đơn tuần.
 
 Thông tin chi tiết:
-Bữa: {', '.join(meals_per_day)}
+Số người ăn: {servings} người
 Thích: {', '.join(user_preferences.favorite_ingredients) if user_preferences.favorite_ingredients else 'Không'}
 Không thích: {', '.join(user_preferences.disliked_ingredients) if user_preferences.disliked_ingredients else 'Không'}
 Món thích: {', '.join(user_preferences.favorite_dishes) if user_preferences.favorite_dishes else 'Không'}
 Món không thích: {', '.join(user_preferences.disliked_dishes) if user_preferences.disliked_dishes else 'Không'}
 Phong cách: {cuisine_type}
 Ngân sách/bữa: {budget_per_meal}đ
-Thời gian max: {max_prep_time}p"""
+Thời gian tối đa: {max_prep_time}p
 
-        # Add previously generated dishes to avoid repetition
-        if generated_dishes:
-            prompt += "\n\nCác món ăn đã có trong thực đơn trước đó (KHÔNG ĐƯỢC lặp lại):"
-            for i, dish in enumerate(generated_dishes, 1):
-                prompt += f"\n{i}. {dish}"
+Không sử dụng các món đã có trước đây: {', '.join(generated_dishes) if generated_dishes else 'Không'}
 
-        # Add optimization instruction if needed
-        if previous_meals:
-            prompt += "\n\nTối ưu từ thực đơn trước:"
-            for day, meals in previous_meals.items():
-                for meal_time, meal_info in meals.items():
-                    prompt += f"\n{day}-{meal_time}: {meal_info['name']} ({', '.join(meal_info['ingredients'])})"
-        
-        # Format instructions - simplified
-        prompt += f"""
 Format JSON:
 {{
   "{day}": {{
-    "Bữa sáng": {{
+"""
+        # Add format for each meal
+        for meal in meals_per_day:
+            prompt += f"""    "{meal}": {{
       "name": "tên món",
-      "ingredients": ["nguyên liệu"],
+      "ingredients": ["nguyên liệu 1", "nguyên liệu 2"],
       "preparation_time": phút,
       "estimated_cost": đồng,
+      "servings": {servings},
       "reused_ingredients": ["tái sử dụng"],
       "nutrition_info": {{
         "protein": "g",
@@ -277,44 +279,27 @@ Format JSON:
       "cooking_method": "phương pháp nấu",
       "food_groups": ["nhóm thực phẩm"]
     }},
-    "Bữa trưa": {{
-      // tương tự như bữa sáng
-    }},
-    "Bữa tối": {{
-      // tương tự như bữa sáng
-    }}
-  }}
-}}"""
-
-        # Log the prompt
-        logger.info(f"Generated prompt for {day}:")
-        logger.info(prompt)
-
+"""
+        
+        # Close the JSON structure
+        prompt = prompt.rstrip(",\n") + "\n  }\n}"
+        
         try:
-            logger.info(f"Sending request to OpenAI API for {day}")
-            response = openai.ChatCompletion.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": "Bạn là một đầu bếp chuyên nghiệp, giúp tạo thực đơn cho một ngày dựa trên sở thích cá nhân, ngân sách và thời gian chuẩn bị. Phản hồi của bạn phải ở định dạng JSON theo mẫu được cung cấp."},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.7,  # Increased for more creativity
-                max_tokens=800
-            )
+            # Call API to generate the daily menu
+            response = self.generate_menu(prompt)
             
-            # Log the raw response
-            logger.info(f"Raw API Response for {day}:")
-            logger.info(str(response))
+            # Parse and extract new dish names for tracking
+            if response and day in response:
+                for meal_time, meal_info in response[day].items():
+                    if isinstance(meal_info, dict) and "name" in meal_info:
+                        generated_dishes.append(meal_info["name"])
             
-            # Extract content and parse JSON
-            content = response.choices[0].message['content']
-            return self._parse_json_response(content)
-            
+            return response
         except Exception as e:
-            logger.error(f"Error generating menu for {day}: {str(e)}")
-            return {"error": f"Error generating menu for {day}: {str(e)}"}
+            logger.error(f"Error generating daily menu: {str(e)}")
+            return {"error": f"Lỗi khi tạo thực đơn cho {day}: {str(e)}"}
     
-    def generate_recipe(self, dish_name: str, cuisine_type: Optional[str] = None) -> Dict[str, Any]:
+    def generate_recipe(self, dish_name: str, cuisine_type: Optional[str] = None, servings: int = 4) -> Dict[str, Any]:
         """Generate a detailed recipe for a specific dish."""
         # Emit progress signal
         self.progress_signal.emit(f"Đang tạo công thức cho món {dish_name}...")
@@ -322,37 +307,38 @@ Format JSON:
         cuisine_str = f" theo phong cách {cuisine_type}" if cuisine_type else ""
         
         # Create prompt with proper formatting
-        prompt = f"Hãy cung cấp công thức chi tiết để nấu món {dish_name}{cuisine_str} theo format JSON sau.\n"
+        prompt = f"Hãy cung cấp công thức chi tiết để nấu món {dish_name}{cuisine_str} cho {servings} người theo format JSON sau.\n"
         prompt += "Chú ý: Đảm bảo rằng tất cả các giá trị số (thời gian, khẩu phần) phải là số nguyên, không phải chuỗi.\n\n"
-        prompt += """
-{
-  "recipe": {
+        prompt += f"""
+{{
+  "recipe": {{
     "name": "tên món ăn",
     "cuisine_type": "loại ẩm thực",
     "ingredients": [
-      {
+      {{
         "item": "tên nguyên liệu",
         "amount": "số lượng",
         "unit": "đơn vị"
-      }
+      }}
     ],
     "steps": [
-      {
+      {{
         "step": 1,
         "description": "mô tả bước thực hiện"
-      }
+      }}
     ],
     "preparation_time": 30,
     "cooking_time": 45,
-    "servings": 4,
+    "servings": {servings},
     "difficulty": "độ khó (dễ/trung bình/khó)"
-  }
-}
+  }}
+}}
 
 Lưu ý quan trọng: 
 1. Bạn PHẢI trả về JSON hợp lệ
 2. Tất cả các giá trị số như preparation_time, cooking_time, servings, và step phải là số nguyên, KHÔNG phải chuỗi
 3. Đảm bảo đúng định dạng và không có lỗi cú pháp JSON
+4. Nguyên liệu phải được tính toán chính xác cho {servings} người ăn
 """
         
         try:
@@ -416,4 +402,99 @@ Lưu ý quan trọng:
             
         except Exception as e:
             logger.error(f"Error in generate_recipe: {str(e)}")
-            return {"error": str(e)} 
+            return {"error": str(e)}
+
+    def _refresh_api_key(self):
+        """Refresh API key from manager."""
+        self.api_key = get_api_key()
+        if self.api_key:
+            openai.api_key = self.api_key
+    
+    def generate_menu(self, prompt: str) -> Optional[Dict[str, Any]]:
+        """Generate menu using OpenAI API."""
+        try:
+            logger.info("Sending request to OpenAI API")
+            response = openai.ChatCompletion.create(
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": "You are a professional chef with extensive knowledge of nutrition and cuisine."},
+                    {"role": "user", "content": prompt}
+                ]
+            )
+            logger.info("Raw API Response:")
+            logger.info(response)
+            
+            # Extract the generated menu from the response
+            menu_text = response.choices[0].message.content
+            try:
+                menu_data = json.loads(menu_text)
+                return menu_data
+            except json.JSONDecodeError:
+                logger.error("Failed to parse menu JSON")
+                return None
+                
+        except openai.error.AuthenticationError:
+            # Try refreshing the API key
+            self._refresh_api_key()
+            if not self.api_key:
+                logger.error("Authentication failed and could not refresh API key")
+                return None
+            # Retry with new API key
+            return self.generate_menu(prompt)
+            
+        except Exception as e:
+            logger.error(f"Error generating menu: {str(e)}")
+            return None
+    
+    def get_recipe(self, dish_name: str, cuisine_type: str) -> Optional[Dict[str, Any]]:
+        """Get detailed recipe for a dish."""
+        try:
+            prompt = f"""
+            Please provide a detailed recipe for "{dish_name}" in {cuisine_type} style.
+            Include:
+            - List of ingredients with quantities
+            - Step by step cooking instructions
+            - Preparation time
+            - Cooking time
+            - Number of servings
+            - Difficulty level
+            
+            Format the response as a JSON object.
+            """
+            
+            logger.info("Sending recipe request to OpenAI API with model: %s", self.model)
+            response = openai.ChatCompletion.create(
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": "You are a professional chef providing detailed recipes."},
+                    {"role": "user", "content": prompt}
+                ]
+            )
+            
+            logger.info("Raw API Response Object:")
+            logger.info(response)
+            
+            recipe_text = response.choices[0].message.content
+            logger.info("Raw API Response:")
+            logger.info(recipe_text)
+            
+            try:
+                recipe_data = json.loads(recipe_text)
+                logger.info("Recipe data: %s", recipe_data)
+                return recipe_data
+            except json.JSONDecodeError:
+                logger.error("Failed to parse recipe JSON")
+                return None
+                
+        except openai.error.AuthenticationError:
+            # Try refreshing the API key
+            self._refresh_api_key()
+            if not self.api_key:
+                logger.error("Authentication failed and could not refresh API key")
+                return None
+            # Retry with new API key
+            return self.get_recipe(dish_name, cuisine_type)
+            
+        except Exception as e:
+            logger.error(f"Error getting recipe: {str(e)}")
+            return None 

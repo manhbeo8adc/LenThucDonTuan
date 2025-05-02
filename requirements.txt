@@ -5,4 +5,5 @@ requests==2.31.0
 python-dotenv==1.0.1
 pyyaml==6.0.1
 psutil==5.9.8  # For system information
-platformdirs==4.2.0  # For platform-specific paths 
+platformdirs==4.2.0  # For platform-specific paths
+cryptography==42.0.5  # For API key encryption 

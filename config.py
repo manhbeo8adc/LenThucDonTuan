@@ -3,12 +3,13 @@ Configuration settings for the application.
 """
 import os
 from dotenv import load_dotenv
+from utils.api_key_manager import get_api_key
 
 # Load environment variables from .env file
 load_dotenv()
 
 # OpenAI API configuration
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+OPENAI_API_KEY = get_api_key()
 OPENAI_MODEL = "gpt-4.1-nano"
 
 # Database configuration

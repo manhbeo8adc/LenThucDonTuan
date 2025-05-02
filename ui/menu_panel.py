@@ -28,7 +28,7 @@ class MenuGeneratorWorker(QThread):
     finished = pyqtSignal(dict)  # Signal emitted when generation is complete
     error = pyqtSignal(str)      # Signal emitted on error
     
-    def __init__(self, api, user, cuisine_type, budget_per_meal, max_prep_time, days, meals_per_day):
+    def __init__(self, api, user, cuisine_type, budget_per_meal, max_prep_time, days, meals_per_day, servings):
         """Initialize the worker."""
         super().__init__()
         self.api = api
@@ -38,6 +38,7 @@ class MenuGeneratorWorker(QThread):
         self.max_prep_time = max_prep_time
         self.days = days
         self.meals_per_day = meals_per_day
+        self.servings = servings
     
     def run(self):
         """Run the generation in a separate thread."""
@@ -48,7 +49,8 @@ class MenuGeneratorWorker(QThread):
                 self.budget_per_meal,
                 self.max_prep_time,
                 self.days,
-                self.meals_per_day
+                self.meals_per_day,
+                self.servings
             )
             
             # Check for errors in the result
@@ -67,17 +69,18 @@ class RecipeGeneratorWorker(QThread):
     finished = pyqtSignal(dict)  # Signal emitted when generation is complete
     error = pyqtSignal(str)      # Signal emitted on error
     
-    def __init__(self, api, dish_name, cuisine_type):
+    def __init__(self, api, dish_name, cuisine_type, servings=4):
         """Initialize the worker."""
         super().__init__()
         self.api = api
         self.dish_name = dish_name
         self.cuisine_type = cuisine_type
+        self.servings = servings
     
     def run(self):
         """Run the generation in a separate thread."""
         try:
-            result = self.api.generate_recipe(self.dish_name, self.cuisine_type)
+            result = self.api.generate_recipe(self.dish_name, self.cuisine_type, self.servings)
             
             # Check for errors in the result
             if isinstance(result, dict) and "error" in result:
@@ -278,45 +281,42 @@ class MenuPanel(QWidget):
         )
     
     def _generate_menu(self):
-        """Generate the weekly menu."""
+        """Generate a new menu."""
         if not self.user or not self.cuisine_type or not self.budget_settings:
             QMessageBox.warning(
                 self,
                 "Thiếu thông tin",
-                "Vui lòng chọn người dùng, phong cách ẩm thực và thiết lập ngân sách."
+                "Vui lòng cung cấp đầy đủ thông tin về người dùng, phong cách ẩm thực và ngân sách."
             )
             return
         
-        # Show progress
-        self.status_label.setText("Đang tạo thực đơn... Vui lòng đợi")
+        # Show progress indicators
         self.progress_container.setVisible(True)
+        self._update_status_label("Đang chuẩn bị tạo thực đơn tuần...")
+        
+        # Disable generate button
         self.generate_button.setEnabled(False)
         
-        # Connect API progress signal to status label
+        # Connect to API progress signal before creating worker
         self.api.progress_signal.connect(self._update_status_label)
         
-        # Call API to generate menu
-        days = self.budget_settings["days"]
-        meals_per_day = self.budget_settings["meals_per_day"]
-        budget_per_meal = self.budget_settings["budget_per_meal"]
-        max_prep_time = self.budget_settings["max_prep_time"]
-        
-        # Create and start worker thread
+        # Create worker thread for menu generation
         self.menu_worker = MenuGeneratorWorker(
             self.api,
             self.user,
             self.cuisine_type,
-            budget_per_meal,
-            max_prep_time,
-            days,
-            meals_per_day
+            self.budget_settings["budget_per_meal"],
+            self.budget_settings["max_prep_time"],
+            self.budget_settings["days"],
+            self.budget_settings["meals_per_day"],
+            self.budget_settings.get("servings", 4)  # Sử dụng thông tin khẩu phần, mặc định là 4 nếu không có
         )
         
         # Connect signals
         self.menu_worker.finished.connect(self._handle_menu_result)
         self.menu_worker.error.connect(self._handle_menu_error)
         
-        # Start the worker
+        # Start worker
         self.menu_worker.start()
     
     def _update_status_label(self, message):
@@ -347,6 +347,7 @@ class MenuPanel(QWidget):
             self.api.progress_signal.disconnect(self._update_status_label)
         except TypeError:
             # Signal was not connected
+            logger.info("Progress signal was not connected")
             pass
     
     def _handle_menu_error(self, error_msg):
@@ -360,6 +361,7 @@ class MenuPanel(QWidget):
             self.api.progress_signal.disconnect(self._update_status_label)
         except TypeError:
             # Signal was not connected
+            logger.info("Progress signal was not connected")
             pass
         
         # Show error message
@@ -562,6 +564,46 @@ class MenuPanel(QWidget):
             layout.addWidget(label)
             
             combo = QComboBox()
+            combo.setStyleSheet("""
+                QComboBox {
+                    font-size: 12pt;
+                    padding: 5px;
+                    border: 1px solid #CCCCCC;
+                    border-radius: 4px;
+                    color: black;
+                    background-color: white;
+                }
+                QComboBox::drop-down {
+                    width: 30px;
+                    border: none;
+                    background-color: transparent;
+                }
+                QComboBox:hover {
+                    border: 1px solid #DB7093;
+                }
+                QComboBox QAbstractItemView {
+                    background-color: white;
+                    border: 1px solid #CCCCCC;
+                    color: black;
+                    selection-background-color: #DB7093;
+                    selection-color: white;
+                    outline: none;
+                }
+                QComboBox QAbstractItemView::item {
+                    min-height: 30px;
+                    padding: 5px;
+                    border: none;
+                }
+                QComboBox QAbstractItemView::item:selected {
+                    background-color: #DB7093;
+                    color: white;
+                }
+                QComboBox QAbstractItemView::item:hover {
+                    background-color: #FFF0F5;
+                    color: black;
+                    border: none;
+                }
+            """)
             for meal_time in meal_times:
                 meal_name = self.current_menu[current_day][meal_time]["name"]
                 combo.addItem(f"{meal_time}: {meal_name}", meal_time)
@@ -635,6 +677,46 @@ class MenuPanel(QWidget):
             layout.addWidget(label)
             
             combo = QComboBox()
+            combo.setStyleSheet("""
+                QComboBox {
+                    font-size: 12pt;
+                    padding: 5px;
+                    border: 1px solid #CCCCCC;
+                    border-radius: 4px;
+                    color: black;
+                    background-color: white;
+                }
+                QComboBox::drop-down {
+                    width: 30px;
+                    border: none;
+                    background-color: transparent;
+                }
+                QComboBox:hover {
+                    border: 1px solid #DB7093;
+                }
+                QComboBox QAbstractItemView {
+                    background-color: white;
+                    border: 1px solid #CCCCCC;
+                    color: black;
+                    selection-background-color: #DB7093;
+                    selection-color: white;
+                    outline: none;
+                }
+                QComboBox QAbstractItemView::item {
+                    min-height: 30px;
+                    padding: 5px;
+                    border: none;
+                }
+                QComboBox QAbstractItemView::item:selected {
+                    background-color: #DB7093;
+                    color: white;
+                }
+                QComboBox QAbstractItemView::item:hover {
+                    background-color: #FFF0F5;
+                    color: black;
+                    border: none;
+                }
+            """)
             for meal_time in meal_times:
                 meal_name = self.current_menu[current_day][meal_time]["name"]
                 combo.addItem(f"{meal_time}: {meal_name}", meal_time)
@@ -658,6 +740,16 @@ class MenuPanel(QWidget):
         meal_info = self.current_menu[current_day][selected_meal]
         dish_name = meal_info["name"]
         
+        # Get servings from the meal info or budget settings
+        servings = meal_info.get("servings", 4)  # Default to 4 if not specified in meal
+        
+        # Use budget settings servings if available
+        if self.budget_settings and "servings" in self.budget_settings:
+            servings = self.budget_settings["servings"]
+            # Update the meal info with the current servings value
+            if "servings" in meal_info:
+                meal_info["servings"] = servings
+        
         # First check if recipe exists in database
         recipe = self.db_manager.get_recipe_by_name(dish_name)
         
@@ -667,6 +759,9 @@ class MenuPanel(QWidget):
             
             try:
                 recipe_data = json.loads(recipe.content)
+                # Update the servings in the recipe data if needed
+                if "recipe" in recipe_data and "servings" in recipe_data["recipe"]:
+                    recipe_data["recipe"]["servings"] = servings
                 dialog = RecipeDialog(self, recipe_data, dish_name)
                 dialog.exec()
                 return
@@ -685,7 +780,8 @@ class MenuPanel(QWidget):
         self.recipe_worker = RecipeGeneratorWorker(
             self.api,
             dish_name,
-            self.cuisine_type
+            self.cuisine_type,
+            servings
         )
         
         # Connect signals
@@ -1193,7 +1289,7 @@ class RecipeDialog(QDialog):
         print(f"Recipe data: {recipe_data}")
         
         self.setWindowTitle(f"Công thức: {dish_name}")
-        self.setMinimumSize(QSize(700, 600))  # Increased minimum size
+        self.setMinimumSize(QSize(800, 700))  # Increased minimum size for better readability
         
         self._create_ui()
     
@@ -1201,18 +1297,28 @@ class RecipeDialog(QDialog):
         """Create the user interface."""
         layout = QVBoxLayout(self)
         # Increase spacing to make text more readable
-        layout.setSpacing(10)
-        layout.setContentsMargins(15, 15, 15, 15)  # Add more margin
+        layout.setSpacing(15)
+        layout.setContentsMargins(20, 20, 20, 20)  # Add more margin
         
         try:
             # Recipe might be under 'recipe' key or directly in the data
             recipe = self.recipe_data.get("recipe", self.recipe_data)
             
-            # Title
+            # Recipe title with better styling
             title_label = QLabel(recipe.get("name", self.dish_name))
-            title_label.setStyleSheet("font-size: 16px; font-weight: bold;")
+            title_label.setStyleSheet("font-size: 18px; font-weight: bold; color: #DB7093; margin-bottom: 10px;")
             title_label.setWordWrap(True)  # Enable word wrap for title
+            title_label.setAlignment(Qt.AlignCenter)
             layout.addWidget(title_label)
+            
+            # Create scroll area for content
+            scroll_area = QScrollArea()
+            scroll_area.setWidgetResizable(True)
+            scroll_area.setFrameShape(QFrame.NoFrame)
+            
+            scroll_content = QWidget()
+            scroll_layout = QVBoxLayout(scroll_content)
+            scroll_layout.setSpacing(15)
             
             # Basic info
             info_widget = QWidget()
@@ -1248,156 +1354,196 @@ class RecipeDialog(QDialog):
                     servings_value = 1
             servings = str(servings_value)
             
-            cuisine_label = QLabel(f"<b>Phong cách:</b> {cuisine_type}")
-            cuisine_label.setWordWrap(True)
-            prep_time_label = QLabel(f"<b>Thời gian chuẩn bị:</b> {prep_time}")
-            prep_time_label.setWordWrap(True)
-            cooking_time_label = QLabel(f"<b>Thời gian nấu:</b> {cooking_time}")
-            cooking_time_label.setWordWrap(True)
-            servings_label = QLabel(f"<b>Khẩu phần:</b> {servings} người")
-            servings_label.setWordWrap(True)
+            # Difficulty
+            difficulty = str(recipe.get('difficulty', 'Không có thông tin'))
             
-            info_layout.addWidget(cuisine_label)
-            info_layout.addWidget(prep_time_label)
-            info_layout.addWidget(cooking_time_label)
-            info_layout.addWidget(servings_label)
-            info_layout.setStretch(0, 1)
-            info_layout.setStretch(1, 1)
-            info_layout.setStretch(2, 1)
-            info_layout.setStretch(3, 1)
+            # Create styled info labels with icons
+            cuisine_info = QLabel(f"🍲 Phong cách: {cuisine_type}")
+            prep_info = QLabel(f"⏱️ Thời gian chuẩn bị: {prep_time}")
+            cooking_info = QLabel(f"🔥 Thời gian nấu: {cooking_time}")
+            servings_info = QLabel(f"👨‍👩‍👧‍👦 Khẩu phần: {servings} người")
+            difficulty_info = QLabel(f"📊 Độ khó: {difficulty}")
             
-            layout.addWidget(info_widget)
+            # Apply styling to info labels
+            info_style = "font-size: 12pt; margin-right: 15px; color: #555555; font-weight: bold;"
+            cuisine_info.setStyleSheet(info_style)
+            prep_info.setStyleSheet(info_style)
+            cooking_info.setStyleSheet(info_style)
+            servings_info.setStyleSheet(info_style)
+            difficulty_info.setStyleSheet(info_style)
             
-            # Separator
+            # Add info labels to layout
+            info_layout.addWidget(cuisine_info)
+            info_layout.addWidget(prep_info)
+            info_layout.addWidget(cooking_info)
+            info_layout.addStretch()
+            
+            # Second row of info
+            info_widget2 = QWidget()
+            info_layout2 = QHBoxLayout(info_widget2)
+            info_layout2.addWidget(servings_info)
+            info_layout2.addWidget(difficulty_info)
+            info_layout2.addStretch()
+            
+            scroll_layout.addWidget(info_widget)
+            scroll_layout.addWidget(info_widget2)
+            
+            # Add separator
             separator = QFrame()
-            separator.setFrameShape(QFrame.Shape.HLine)
-            separator.setFrameShadow(QFrame.Shadow.Sunken)
-            layout.addWidget(separator)
+            separator.setFrameShape(QFrame.HLine)
+            separator.setFrameShadow(QFrame.Sunken)
+            separator.setStyleSheet("background-color: #F0F0F0;")
+            scroll_layout.addWidget(separator)
             
-            # Create a scroll area for all content
-            scroll_area = QScrollArea()
-            scroll_area.setWidgetResizable(True)
-            scroll_area.setFrameShape(QFrame.NoFrame)
+            # Ingredients section
+            ingredients_title = QLabel("Nguyên Liệu")
+            ingredients_title.setStyleSheet("font-size: 16pt; font-weight: bold; color: #2E8B57; margin-top: 10px;")
+            scroll_layout.addWidget(ingredients_title)
             
-            scroll_content = QWidget()
-            scroll_layout = QVBoxLayout(scroll_content)
-            scroll_layout.setSpacing(10)
+            ingredients = recipe.get('ingredients', [])
             
-            # Ingredients
-            ingredients_group = QGroupBox("Nguyên liệu")
-            ingredients_layout = QVBoxLayout(ingredients_group)
-            
-            ingredients_text = QTextEdit()
-            ingredients_text.setReadOnly(True)
-            ingredients_text.setMinimumHeight(100)
-            
-            ingredients = recipe.get("ingredients", [])
-            if isinstance(ingredients, list):
+            if ingredients:
+                # Create a frame with nicer styling
+                ingredients_frame = QFrame()
+                ingredients_frame.setFrameShape(QFrame.StyledPanel)
+                ingredients_frame.setStyleSheet("background-color: #F5FFFA; border-radius: 8px; padding: 10px;")
+                ingredients_layout = QVBoxLayout(ingredients_frame)
+                
+                # Iterate through ingredients
                 for ingredient in ingredients:
                     if isinstance(ingredient, dict):
-                        item = ingredient.get("item", ingredient.get("name", ""))
-                        # Ensure amount is string
-                        amount = str(ingredient.get("amount", ""))
-                        unit = str(ingredient.get("unit", ""))
+                        # Handle structured ingredients
+                        item = ingredient.get('item', '')
+                        amount = ingredient.get('amount', '')
+                        unit = ingredient.get('unit', '')
                         
-                        # Handle different ingredient formats
                         if item:
+                            # Format: "• Item - Amount Unit"
+                            text = f"• {item}"
                             if amount and unit:
-                                ingredients_text.append(f"• {item}: {amount} {unit}")
-                            else:
-                                ingredients_text.append(f"• {item}")
+                                text += f" - {amount} {unit}"
+                            elif amount:
+                                text += f" - {amount}"
+                            
+                            ingredient_label = QLabel(text)
+                            ingredient_label.setStyleSheet("font-size: 12pt; line-height: 1.5; color: #333333; margin: 3px 0;")
+                            ingredients_layout.addWidget(ingredient_label)
                     else:
-                        ingredients_text.append(f"• {ingredient}")
+                        # Handle string ingredients
+                        ingredient_label = QLabel(f"• {ingredient}")
+                        ingredient_label.setStyleSheet("font-size: 12pt; line-height: 1.5; color: #333333; margin: 3px 0;")
+                        ingredients_layout.addWidget(ingredient_label)
+                
+                scroll_layout.addWidget(ingredients_frame)
             else:
-                ingredients_text.setPlainText(str(ingredients))
+                no_ingredients = QLabel("Không có thông tin về nguyên liệu")
+                no_ingredients.setStyleSheet("font-style: italic; color: #888888;")
+                scroll_layout.addWidget(no_ingredients)
             
-            ingredients_layout.addWidget(ingredients_text)
-            scroll_layout.addWidget(ingredients_group)
+            # Add separator
+            separator2 = QFrame()
+            separator2.setFrameShape(QFrame.HLine)
+            separator2.setFrameShadow(QFrame.Sunken)
+            separator2.setStyleSheet("background-color: #F0F0F0;")
+            scroll_layout.addWidget(separator2)
             
-            # Steps
-            steps_group = QGroupBox("Các bước thực hiện")
-            steps_layout = QVBoxLayout(steps_group)
+            # Steps section
+            steps_title = QLabel("Các Bước Thực Hiện")
+            steps_title.setStyleSheet("font-size: 16pt; font-weight: bold; color: #DB7093; margin-top: 10px;")
+            scroll_layout.addWidget(steps_title)
             
-            steps_text = QTextEdit()
-            steps_text.setReadOnly(True)
-            steps_text.setMinimumHeight(150)
+            steps = recipe.get('steps', [])
             
-            steps = recipe.get("steps", [])
-            if isinstance(steps, list):
-                for i, step in enumerate(steps, 1):
+            if steps:
+                # Create a frame with nicer styling for steps
+                steps_frame = QFrame()
+                steps_frame.setFrameShape(QFrame.StyledPanel)
+                steps_frame.setStyleSheet("background-color: #FFF5F5; border-radius: 8px; padding: 12px;")
+                steps_layout = QVBoxLayout(steps_frame)
+                
+                # Add more spacing between steps
+                steps_layout.setSpacing(15)
+                
+                for step in steps:
                     if isinstance(step, dict):
-                        # Ensure step_num is an integer or string representation
-                        step_num = step.get("step", i)
-                        if isinstance(step_num, str):
-                            try:
-                                step_num = int(step_num)
-                            except (ValueError, TypeError):
-                                step_num = i
-                        desc = str(step.get("description", ""))
-                        steps_text.append(f"{step_num}. {desc}")
+                        # Handle structured steps
+                        step_number = step.get('step', '')
+                        description = step.get('description', '')
+                        
+                        if description:
+                            # Create a container for each step
+                            step_container = QWidget()
+                            step_container_layout = QVBoxLayout(step_container)
+                            step_container_layout.setContentsMargins(5, 5, 5, 10)
+                            
+                            # Step number label
+                            step_number_label = QLabel(f"Bước {step_number}")
+                            step_number_label.setStyleSheet("font-size: 14pt; font-weight: bold; color: #DB7093;")
+                            step_container_layout.addWidget(step_number_label)
+                            
+                            # Step description with better line height
+                            description_label = QLabel(description)
+                            description_label.setWordWrap(True)
+                            description_label.setStyleSheet("font-size: 12pt; line-height: 1.6; color: #333333; margin-left: 15px;")
+                            step_container_layout.addWidget(description_label)
+                            
+                            steps_layout.addWidget(step_container)
+                            
+                            # Add a subtle separator between steps
+                            if step != steps[-1]:  # Don't add after the last step
+                                step_separator = QFrame()
+                                step_separator.setFrameShape(QFrame.HLine)
+                                step_separator.setFrameShadow(QFrame.Sunken)
+                                step_separator.setStyleSheet("background-color: #F0F0F0; max-height: 1px;")
+                                steps_layout.addWidget(step_separator)
                     else:
-                        steps_text.append(f"{i}. {step}")
+                        # Handle string steps
+                        step_label = QLabel(step)
+                        step_label.setWordWrap(True)
+                        step_label.setStyleSheet("font-size: 12pt; line-height: 1.6; color: #333333; margin: 5px 0;")
+                        steps_layout.addWidget(step_label)
+                
+                scroll_layout.addWidget(steps_frame)
             else:
-                steps_text.setPlainText(str(steps))
+                no_steps = QLabel("Không có thông tin về các bước thực hiện")
+                no_steps.setStyleSheet("font-style: italic; color: #888888;")
+                scroll_layout.addWidget(no_steps)
             
-            steps_layout.addWidget(steps_text)
-            scroll_layout.addWidget(steps_group)
+            # Add extra spacing at the bottom
+            scroll_layout.addStretch()
             
-            # Tips
-            tips = recipe.get("tips", [])
-            if tips:
-                tips_group = QGroupBox("Mẹo")
-                tips_layout = QVBoxLayout(tips_group)
-                
-                tips_text = QTextEdit()
-                tips_text.setReadOnly(True)
-                tips_text.setMinimumHeight(80)
-                
-                if isinstance(tips, list):
-                    for tip in tips:
-                        tips_text.append(f"• {tip}")
-                else:
-                    tips_text.setPlainText(str(tips))
-                
-                tips_layout.addWidget(tips_text)
-                scroll_layout.addWidget(tips_group)
-            
-            # Set the scroll content
             scroll_area.setWidget(scroll_content)
-            layout.addWidget(scroll_area, 1)  # Add stretch so content gets more space
-        
+            layout.addWidget(scroll_area, 1)  # Give scroll area all available space
+            
+            # Buttons
+            buttons_layout = QHBoxLayout()
+            
+            save_button = QPushButton("Lưu công thức")
+            save_button.clicked.connect(self._save_recipe)
+            
+            close_button = QPushButton("Đóng")
+            close_button.clicked.connect(self.close)
+            
+            buttons_layout.addStretch()
+            buttons_layout.addWidget(save_button)
+            buttons_layout.addWidget(close_button)
+            
+            layout.addLayout(buttons_layout)
+            
         except Exception as e:
-            # Show error if UI creation fails
-            error_label = QLabel(f"Lỗi khi hiển thị công thức: {str(e)}")
-            error_label.setStyleSheet("color: red; font-weight: bold;")
-            error_label.setWordWrap(True)
+            # Show error message
+            error_label = QLabel(f"Lỗi hiển thị công thức: {str(e)}")
+            error_label.setStyleSheet("color: red;")
             layout.addWidget(error_label)
             
-            # Add raw data display as fallback
-            error_details = QLabel("Chi tiết lỗi (dữ liệu gốc):")
-            error_details.setStyleSheet("font-weight: bold;")
-            layout.addWidget(error_details)
+            close_button = QPushButton("Đóng")
+            close_button.clicked.connect(self.close)
             
-            raw_data = QTextEdit()
-            raw_data.setReadOnly(True)
-            raw_data.setText(str(self.recipe_data))
-            layout.addWidget(raw_data)
-        
-        # Close and save buttons
-        button_layout = QHBoxLayout()
-        
-        # Add save recipe button
-        save_button = QPushButton("Lưu công thức")
-        save_button.clicked.connect(self._save_recipe)
-        button_layout.addWidget(save_button)
-        
-        button_layout.addStretch()
-        
-        close_button = QPushButton("Đóng")
-        close_button.clicked.connect(self.accept)
-        button_layout.addWidget(close_button)
-        
-        layout.addLayout(button_layout)
+            buttons_layout = QHBoxLayout()
+            buttons_layout.addStretch()
+            buttons_layout.addWidget(close_button)
+            
+            layout.addLayout(buttons_layout)
     
     def _save_recipe(self):
         """Save the recipe to a file."""
@@ -1463,6 +1609,49 @@ class SavedRecipesDialog(QDialog):
         self.cuisine_combo.addItem("Tất cả", "")
         # Cuisines will be populated in _load_recipes
         self.cuisine_combo.currentIndexChanged.connect(self._filter_recipes)
+        
+        # Apply consistent ComboBox styling
+        self.cuisine_combo.setStyleSheet("""
+            QComboBox {
+                font-size: 11pt;
+                padding: 5px;
+                border: 1px solid #CCCCCC;
+                border-radius: 4px;
+                min-height: 25px;
+                color: black;
+                background-color: white;
+            }
+            QComboBox::drop-down {
+                width: 30px;
+                border: none;
+                background-color: transparent;
+            }
+            QComboBox:hover {
+                border: 1px solid #DB7093;
+            }
+            QComboBox QAbstractItemView {
+                background-color: white;
+                border: 1px solid #CCCCCC;
+                color: black;
+                selection-background-color: #DB7093;
+                selection-color: white;
+                outline: none;
+            }
+            QComboBox QAbstractItemView::item {
+                min-height: 25px;
+                padding: 5px;
+                border: none;
+            }
+            QComboBox QAbstractItemView::item:selected {
+                background-color: #DB7093;
+                color: white;
+            }
+            QComboBox QAbstractItemView::item:hover {
+                background-color: #FFF0F5;
+                color: black;
+                border: none;
+            }
+        """)
         
         filter_layout.addWidget(filter_label)
         filter_layout.addWidget(self.filter_edit)
@@ -1648,6 +1837,49 @@ class SavedMenusDialog(QDialog):
         self.cuisine_combo.addItem("Tất cả", "")
         # Cuisines will be populated in _load_menus
         self.cuisine_combo.currentIndexChanged.connect(self._filter_menus)
+        
+        # Apply consistent ComboBox styling
+        self.cuisine_combo.setStyleSheet("""
+            QComboBox {
+                font-size: 11pt;
+                padding: 5px;
+                border: 1px solid #CCCCCC;
+                border-radius: 4px;
+                min-height: 25px;
+                color: black;
+                background-color: white;
+            }
+            QComboBox::drop-down {
+                width: 30px;
+                border: none;
+                background-color: transparent;
+            }
+            QComboBox:hover {
+                border: 1px solid #DB7093;
+            }
+            QComboBox QAbstractItemView {
+                background-color: white;
+                border: 1px solid #CCCCCC;
+                color: black;
+                selection-background-color: #DB7093;
+                selection-color: white;
+                outline: none;
+            }
+            QComboBox QAbstractItemView::item {
+                min-height: 25px;
+                padding: 5px;
+                border: none;
+            }
+            QComboBox QAbstractItemView::item:selected {
+                background-color: #DB7093;
+                color: white;
+            }
+            QComboBox QAbstractItemView::item:hover {
+                background-color: #FFF0F5;
+                color: black;
+                border: none;
+            }
+        """)
         
         filter_layout.addWidget(filter_label)
         filter_layout.addWidget(self.filter_edit)
