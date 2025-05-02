@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+.env
+.venv
+ENV/
+
+# Database and sensitive data
+*.db
+*.sqlite3
+data.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# API keys
+.env
+# Nhưng vẫn giữ example.env
+!example.env
+
+# Log files
+*.log
+
+# Cached files
+.cached/
+
+# Custom project specific 

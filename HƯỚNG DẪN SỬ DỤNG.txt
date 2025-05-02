@@ -1,0 +1,57 @@
+HƯỚNG DẪN SỬ DỤNG - ỨNG DỤNG LÊN THỰC ĐƠN TUẦN
+========================================
+
+1. GIỚI THIỆU
+--------------
+Ứng dụng "Lên Thực Đơn Tuần" giúp bạn lập kế hoạch các bữa ăn trong tuần, tạo công thức nấu ăn, 
+và tối ưu hóa việc mua sắm nguyên liệu. Ứng dụng sử dụng AI để tạo thực đơn phù hợp với sở thích
+và ngân sách của bạn.
+
+2. YÊU CẦU
+--------------
+- Ứng dụng cần OpenAI API Key để hoạt động
+- Kết nối internet để gọi API
+
+3. CÁCH LẤY OPENAI API KEY
+--------------------------
+1. Truy cập: https://platform.openai.com/api-keys
+2. Đăng nhập hoặc đăng ký tài khoản OpenAI
+3. Nhấn vào "Create new secret key"
+4. Đặt tên cho key (ví dụ: "Lên Thực Đơn Tuần")
+5. Sao chép API key được tạo ra
+
+* LƯU Ý: OpenAI có thể tính phí khi sử dụng API, vui lòng kiểm tra chính sách giá của họ.
+
+4. CÁCH SỬ DỤNG ỨNG DỤNG
+-------------------------
+1. Mở tệp LenThucDonTuan.exe
+2. Khi được yêu cầu, nhập OpenAI API Key của bạn
+   - API key sẽ được lưu an toàn trong một file mã hóa
+   - Bạn chỉ cần nhập API key một lần duy nhất
+3. Thiết lập:
+   - Thêm thông tin người dùng (sở thích, không thích)
+   - Chọn phong cách ẩm thực
+   - Thiết lập ngân sách và thời gian chuẩn bị
+4. Tạo thực đơn tuần
+5. Xem, chỉnh sửa và lưu thực đơn
+6. Xem công thức chi tiết cho từng món ăn
+
+5. CÁC TÍNH NĂNG CHÍNH
+----------------------
+- Tạo thực đơn tuần đa dạng
+- Tùy chỉnh thực đơn theo sở thích cá nhân
+- Lưu và quản lý công thức
+- Tối ưu hóa nguyên liệu để tiết kiệm chi phí
+- Tự động tính toán giá tiền và thời gian chuẩn bị
+
+6. HỔ TRỢ
+---------
+Nếu có bất kỳ vấn đề hoặc câu hỏi nào, vui lòng liên hệ với người phát triển.
+
+7. LƯU Ý QUAN TRỌNG
+-------------------
+- API key của bạn sẽ được lưu trữ an toàn trong một file mã hóa
+- Bạn có thể tùy chọn sử dụng file .env để lưu API key:
+  + Tạo file .env trong cùng thư mục với file .exe
+  + Thêm dòng: OPENAI_API_KEY=your_api_key_here
+- Nếu cả file mã hóa và file .env đều tồn tại, ứng dụng sẽ ưu tiên sử dụng API key từ file .env 
