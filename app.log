@@ -1,0 +1,1282 @@
+2025-05-02 09:41:20,481 - api.openai_api - INFO - Sending request to OpenAI API with model: gpt-4.1-nano
+2025-05-02 09:41:28,397 - api.openai_api - INFO - Raw API Response Object:
+2025-05-02 09:41:28,397 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSadW7jh14n79c90AtPqI4ChEl3Tb",
+  "object": "chat.completion",
+  "created": 1746153714,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"menu\": {\n    \"Th\u1ee9 hai\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la v\u00e0 b\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"B\u00e1nh m\u00ec\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u \u0103n c\u01a1m\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 ba\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la v\u00e0 b\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"B\u00e1nh m\u00ec\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u \u0103n c\u01a1m\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 t\u01b0\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la v\u00e0 b\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"B\u00e1nh m\u00ec\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u \u0103n c\u01a1m\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 n\u0103m\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la v\u00e0 b\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"B\u00e1nh m\u00ec\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u \u0103n c\u01a1m\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 s\u00e1u\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la v\u00e0 b\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"B\u00e1nh m\u00ec\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u \u0103n c\u01a1m\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 b\u1ea3y\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la v\u00e0 b\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"B\u00e1nh m\u00ec\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa tr\u01b0a\": {\n",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 313,
+    "completion_tokens": 1500,
+    "total_tokens": 1813,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
+2025-05-02 09:41:28,401 - api.openai_api - INFO - Raw API Response:
+2025-05-02 09:41:28,401 - api.openai_api - INFO - {
+  "menu": {
+    "Thứ hai": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu ăn cơm",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ ba": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu ăn cơm",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ tư": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu ăn cơm",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ năm": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu ăn cơm",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ sáu": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu ăn cơm",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ bảy": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+
+2025-05-02 09:41:28,404 - api.openai_api - WARNING - Direct JSON parsing failed, attempting to clean response
+2025-05-02 09:41:28,405 - api.openai_api - INFO - Cleaned JSON content:
+2025-05-02 09:41:28,405 - api.openai_api - INFO - {
+  "menu": {
+    "Thứ hai": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu ăn cơm",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ ba": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu ăn cơm",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ tư": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu ăn cơm",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ năm": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu ăn cơm",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ sáu": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu ăn cơm",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ bảy": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la và bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+2025-05-02 09:41:28,409 - api.openai_api - ERROR - JSON parsing error after cleaning: Expecting ',' delimiter: line 125 column 8 (char 4400)
+2025-05-02 09:42:34,177 - api.openai_api - INFO - Sending request to OpenAI API with model: gpt-4.1-nano
+2025-05-02 09:42:42,639 - api.openai_api - INFO - Raw API Response Object:
+2025-05-02 09:42:42,639 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSaejm6Mro09xtDIaYrrILIQpMltw",
+  "object": "chat.completion",
+  "created": 1746153789,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"menu\": {\n    \"Th\u1ee9 hai\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 \u1ed1p la v\u1edbi b\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 60000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 45,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      }\n    },\n    \"Th\u1ee9 ba\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\"],\n        \"preparation_time\": 15,\n        \"estimated_cost\": 50000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 45,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"S\u01b0\u1eddn heo\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 t\u01b0\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 \u1ed1p la v\u1edbi b\u00ed \u0111\u1ecf\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 60000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 45,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"S\u01b0\u1eddn heo\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 n\u0103m\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 \u1ed1p la v\u1edbi b\u00ed \u0111\u1ecf\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 60000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 45,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"S\u01b0\u1eddn heo\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 s\u00e1u\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 \u1ed1p la v\u1edbi b\u00ed \u0111\u1ecf\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 60000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 45,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"S\u01b0\u1eddn heo\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 b\u1ea3y\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\"],\n        \"preparation_time\": 15,\n        \"estimated_cost\": 50000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 45,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"S\u01b0\u1eddn heo\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Ch\u1ee7 nh\u1eadt\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 \u1ed1p la v\u1edbi b\u00ed",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 313,
+    "completion_tokens": 1500,
+    "total_tokens": 1813,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
+2025-05-02 09:42:42,643 - api.openai_api - INFO - Raw API Response:
+2025-05-02 09:42:42,643 - api.openai_api - INFO - {
+  "menu": {
+    "Thứ hai": {
+      "Bữa sáng": {
+        "name": "Trứng gà ốp la với bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi"],
+        "preparation_time": 20,
+        "estimated_cost": 60000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 45,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      }
+    },
+    "Thứ ba": {
+      "Bữa sáng": {
+        "name": "Bí đỏ xào tỏi",
+        "ingredients": ["Bí đỏ", "Tỏi"],
+        "preparation_time": 15,
+        "estimated_cost": 50000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 45,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Sườn heo", "Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ tư": {
+      "Bữa sáng": {
+        "name": "Trứng gà ốp la với bí đỏ",
+        "ingredients": ["Trứng gà", "Bí đỏ"],
+        "preparation_time": 20,
+        "estimated_cost": 60000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 45,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Sườn heo", "Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ năm": {
+      "Bữa sáng": {
+        "name": "Trứng gà ốp la với bí đỏ",
+        "ingredients": ["Trứng gà", "Bí đỏ"],
+        "preparation_time": 20,
+        "estimated_cost": 60000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 45,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Sườn heo", "Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ sáu": {
+      "Bữa sáng": {
+        "name": "Trứng gà ốp la với bí đỏ",
+        "ingredients": ["Trứng gà", "Bí đỏ"],
+        "preparation_time": 20,
+        "estimated_cost": 60000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 45,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Sườn heo", "Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ bảy": {
+      "Bữa sáng": {
+        "name": "Bí đỏ xào tỏi",
+        "ingredients": ["Bí đỏ", "Tỏi"],
+        "preparation_time": 15,
+        "estimated_cost": 50000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 45,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Sườn heo", "Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Chủ nhật": {
+      "Bữa sáng": {
+        "name": "Trứng gà ốp la với bí
+2025-05-02 09:42:42,649 - api.openai_api - WARNING - Direct JSON parsing failed, attempting to clean response
+2025-05-02 09:42:42,650 - api.openai_api - INFO - Cleaned JSON content:
+2025-05-02 09:42:42,650 - api.openai_api - INFO - {  "menu": {    "Thứ hai": {      "Bữa sáng": {        "name": "Trứng gà ốp la với bí đỏ xào tỏi",        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi"],        "preparation_time": 20,        "estimated_cost": 60000,        "reused_ingredients": []      },      "Bữa trưa": {        "name": "Thịt kho tàu",        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],        "preparation_time": 60,        "estimated_cost": 70000,        "reused_ingredients": []      },      "Bữa tối": {        "name": "Sườn rim dứa",        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],        "preparation_time": 45,        "estimated_cost": 70000,        "reused_ingredients": []      }    },    "Thứ ba": {      "Bữa sáng": {        "name": "Bí đỏ xào tỏi",        "ingredients": ["Bí đỏ", "Tỏi"],        "preparation_time": 15,        "estimated_cost": 50000,        "reused_ingredients": []      },      "Bữa trưa": {        "name": "Thịt kho tàu",        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],        "preparation_time": 60,        "estimated_cost": 70000,        "reused_ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"]      },      "Bữa tối": {        "name": "Sườn rim dứa",        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],        "preparation_time": 45,        "estimated_cost": 70000,        "reused_ingredients": ["Sườn heo", "Nước mắm", "Hạt tiêu"]      }    },    "Thứ tư": {      "Bữa sáng": {        "name": "Trứng gà ốp la với bí đỏ",        "ingredients": ["Trứng gà", "Bí đỏ"],        "preparation_time": 20,        "estimated_cost": 60000,        "reused_ingredients": []      },      "Bữa trưa": {        "name": "Thịt kho tàu",        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],        "preparation_time": 60,        "estimated_cost": 70000,        "reused_ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"]      },      "Bữa tối": {        "name": "Sườn rim dứa",        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],        "preparation_time": 45,        "estimated_cost": 70000,        "reused_ingredients": ["Sườn heo", "Nước mắm", "Hạt tiêu"]      }    },    "Thứ năm": {      "Bữa sáng": {        "name": "Trứng gà ốp la với bí đỏ",        "ingredients": ["Trứng gà", "Bí đỏ"],        "preparation_time": 20,        "estimated_cost": 60000,        "reused_ingredients": []      },      "Bữa trưa": {        "name": "Thịt kho tàu",        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],        "preparation_time": 60,        "estimated_cost": 70000,        "reused_ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"]      },      "Bữa tối": {        "name": "Sườn rim dứa",        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],        "preparation_time": 45,        "estimated_cost": 70000,        "reused_ingredients": ["Sườn heo", "Nước mắm", "Hạt tiêu"]      }    },    "Thứ sáu": {      "Bữa sáng": {        "name": "Trứng gà ốp la với bí đỏ",        "ingredients": ["Trứng gà", "Bí đỏ"],        "preparation_time": 20,        "estimated_cost": 60000,        "reused_ingredients": []      },      "Bữa trưa": {        "name": "Thịt kho tàu",        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],        "preparation_time": 60,        "estimated_cost": 70000,        "reused_ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"]      },      "Bữa tối": {        "name": "Sườn rim dứa",        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],        "preparation_time": 45,        "estimated_cost": 70000,        "reused_ingredients": ["Sườn heo", "Nước mắm", "Hạt tiêu"]      }    },    "Thứ bảy": {      "Bữa sáng": {        "name": "Bí đỏ xào tỏi",        "ingredients": ["Bí đỏ", "Tỏi"],        "preparation_time": 15,        "estimated_cost": 50000,        "reused_ingredients": []      },      "Bữa trưa": {        "name": "Thịt kho tàu",        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],        "preparation_time": 60,        "estimated_cost": 70000,        "reused_ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"]      },      "Bữa tối": {        "name": "Sườn rim dứa",        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],        "preparation_time": 45,        "estimated_cost": 70000,        "reused_ingredients": ["Sườn heo", "Nước mắm", "Hạt tiêu"]      }    }
+2025-05-02 09:42:42,651 - api.openai_api - ERROR - JSON parsing error after cleaning: Expecting ',' delimiter: line 1 column 4344 (char 4343)
+2025-05-02 09:42:42,651 - api.openai_api - ERROR - JSON parsing error after all cleaning attempts: Expecting ',' delimiter: line 1 column 4344 (char 4343)
+2025-05-02 09:44:09,289 - api.openai_api - INFO - Sending request to OpenAI API with model: gpt-4.1-nano
+2025-05-02 09:44:17,603 - api.openai_api - INFO - Raw API Response Object:
+2025-05-02 09:44:17,603 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSagGznIViuBDM0bhnCt7TK8iD5OD",
+  "object": "chat.completion",
+  "created": 1746153884,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"menu\": {\n    \"Th\u1ee9 hai\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la v\u1edbi b\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"B\u00e1nh m\u00ec\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 30,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 ba\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 60000,\n        \"reused_ingredients\": [\"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"C\u01a1m + Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"Ng\u00f4 ng\u1ecdt lu\u1ed9c\",\n        \"ingredients\": [\"Ng\u00f4 ng\u1ecdt\"],\n        \"preparation_time\": 15,\n        \"estimated_cost\": 30000,\n        \"reused_ingredients\": []\n      }\n    },\n    \"Th\u1ee9 t\u01b0\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 \u1ed1p la\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\"],\n        \"preparation_time\": 10,\n        \"estimated_cost\": 20000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 60000,\n        \"reused_ingredients\": [\"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 n\u0103m\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00e1nh m\u00ec\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 60000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"Ng\u00f4 ng\u1ecdt lu\u1ed9c\",\n        \"ingredients\": [\"Ng\u00f4 ng\u1ecdt\"],\n        \"preparation_time\": 15,\n        \"estimated_cost\": 30000,\n        \"reused_ingredients\": []\n      }\n    },\n    \"Th\u1ee9 s\u00e1u\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 \u1ed1p la\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\"],\n        \"preparation_time\": 10,\n        \"estimated_cost\": 20000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 60000,\n        \"reused_ingredients\": [\"H\u1ea1t ti\u00eau\"]\n      }\n    },\n    \"Th\u1ee9 b\u1ea3y\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00e1nh m\u00ec tr\u1ee9ng \u1ed1p la\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00e1nh m\u00ec\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 60000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"Ng\u00f4 ng\u1ecdt lu\u1ed9c\",\n        \"ingredients\": [\"Ng\u00f4 ng\u1ecdt\"],\n        \"preparation_time\": 15,\n        \"estimated_cost\": 30000,\n        \"reused_ingredients\": []\n      }\n    },\n    \"Ch\u1ee7 nh\u1eadt\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 \u1ed1p la\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\"],\n        \"preparation_time\": 10,\n        \"estimated_cost\": 20000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": [\"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"]\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"T\u1ecfi\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 60000,\n        \"reused_ingredients\": [\"H\u1ea1t ti\u00eau\"]\n      }\n    }\n  },\n  \"optimization_notes\": [\n    \"Ch\u1ecdn c\u00e1c m\u00f3n \u0111\u01a1n gi\u1ea3n, nhanh \u0111\u1ec3 ph\u00f9 h\u1ee3p v\u1edbi th\u1eddi gian t\u1ed1i \u0111a 60 ph\u00fat.\",\n    \"S\u1eed d\u1ee5ng nguy\u00ean li\u1ec7u chung nh\u01b0 n\u01b0\u1edbc m\u1eafm, h\u1ea1t ti\u00eau \u0111\u1ec3 ti\u1ebft ki\u1ec7m ng\u00e2n s\u00e1ch.\",\n    \"Th\u1ef1c \u0111\u01a1n t\u1eadp trung v\u00e0o c\u00e1c m\u00f3n mi\u1ec1n B\u1eafc ph\u00f9 h\u1ee3p phong c\u00e1ch y\u00eau th\u00edch.\",\n    \"C\u00e1c m\u00f3n \u0111\u1ec1u ph\u00f9 h\u1ee3p ng\u00e2n s\u00e1ch 70,000\u0111/b\u1eefa v\u00e0 \u0111\u1ea3m b\u1ea3o \u0111\u1ee7 dinh d\u01b0\u1ee1ng.\"\n  ]\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 313,
+    "completion_tokens": 1682,
+    "total_tokens": 1995,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
+2025-05-02 09:44:17,607 - api.openai_api - INFO - Raw API Response:
+2025-05-02 09:44:17,607 - api.openai_api - INFO - {
+  "menu": {
+    "Thứ hai": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la với bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Bánh mì", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 30,
+        "estimated_cost": 65000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      }
+    },
+    "Thứ ba": {
+      "Bữa sáng": {
+        "name": "Bí đỏ xào tỏi",
+        "ingredients": ["Bí đỏ", "Tỏi", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 60000,
+        "reused_ingredients": ["Hạt tiêu"]
+      },
+      "Bữa trưa": {
+        "name": "Cơm + Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Ngô ngọt luộc",
+        "ingredients": ["Ngô ngọt"],
+        "preparation_time": 15,
+        "estimated_cost": 30000,
+        "reused_ingredients": []
+      }
+    },
+    "Thứ tư": {
+      "Bữa sáng": {
+        "name": "Trứng gà ốp la",
+        "ingredients": ["Trứng gà"],
+        "preparation_time": 10,
+        "estimated_cost": 20000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Bí đỏ xào tỏi",
+        "ingredients": ["Bí đỏ", "Tỏi", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 60000,
+        "reused_ingredients": ["Hạt tiêu"]
+      }
+    },
+    "Thứ năm": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la",
+        "ingredients": ["Trứng gà", "Bánh mì"],
+        "preparation_time": 20,
+        "estimated_cost": 60000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Ngô ngọt luộc",
+        "ingredients": ["Ngô ngọt"],
+        "preparation_time": 15,
+        "estimated_cost": 30000,
+        "reused_ingredients": []
+      }
+    },
+    "Thứ sáu": {
+      "Bữa sáng": {
+        "name": "Trứng gà ốp la",
+        "ingredients": ["Trứng gà"],
+        "preparation_time": 10,
+        "estimated_cost": 20000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Bí đỏ xào tỏi",
+        "ingredients": ["Bí đỏ", "Tỏi", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 60000,
+        "reused_ingredients": ["Hạt tiêu"]
+      }
+    },
+    "Thứ bảy": {
+      "Bữa sáng": {
+        "name": "Bánh mì trứng ốp la",
+        "ingredients": ["Trứng gà", "Bánh mì"],
+        "preparation_time": 20,
+        "estimated_cost": 60000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Ngô ngọt luộc",
+        "ingredients": ["Ngô ngọt"],
+        "preparation_time": 15,
+        "estimated_cost": 30000,
+        "reused_ingredients": []
+      }
+    },
+    "Chủ nhật": {
+      "Bữa sáng": {
+        "name": "Trứng gà ốp la",
+        "ingredients": ["Trứng gà"],
+        "preparation_time": 10,
+        "estimated_cost": 20000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": ["Nước mắm", "Hạt tiêu"]
+      },
+      "Bữa tối": {
+        "name": "Bí đỏ xào tỏi",
+        "ingredients": ["Bí đỏ", "Tỏi", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 60000,
+        "reused_ingredients": ["Hạt tiêu"]
+      }
+    }
+  },
+  "optimization_notes": [
+    "Chọn các món đơn giản, nhanh để phù hợp với thời gian tối đa 60 phút.",
+    "Sử dụng nguyên liệu chung như nước mắm, hạt tiêu để tiết kiệm ngân sách.",
+    "Thực đơn tập trung vào các món miền Bắc phù hợp phong cách yêu thích.",
+    "Các món đều phù hợp ngân sách 70,000đ/bữa và đảm bảo đủ dinh dưỡng."
+  ]
+}
+2025-05-02 09:47:14,465 - api.openai_api - INFO - Generating menu for Thứ hai
+2025-05-02 09:47:15,819 - api.openai_api - INFO - Raw response for Thứ hai:
+2025-05-02 09:47:15,819 - api.openai_api - INFO - {
+  "Thứ hai": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn", "muối"],
+      "preparation_time": 15,
+      "estimated_cost": 20000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["trứng gà", "thịt ba chỉ", "nước mắm", "hạt tiêu", "tỏi", "đường", "dầu ăn"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "nước mắm", "hạt tiêu", "tỏi", "dầu ăn"],
+      "preparation_time": 40,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    }
+  }
+}
+2025-05-02 09:47:15,820 - api.openai_api - INFO - Generating menu for Thứ ba
+2025-05-02 09:47:17,187 - api.openai_api - INFO - Raw response for Thứ ba:
+2025-05-02 09:47:17,188 - api.openai_api - INFO - {
+  "Thứ ba": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn", "muối"],
+      "preparation_time": 15,
+      "estimated_cost": 25000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["trứng gà", "thịt ba chỉ", "nước mắm", "hạt tiêu", "tỏi", "đường", "dầu ăn"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "nước mắm", "hạt tiêu", "tỏi", "dầu ăn"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    }
+  }
+}
+2025-05-02 09:47:17,188 - api.openai_api - INFO - Generating menu for Thứ tư
+2025-05-02 09:47:18,700 - api.openai_api - INFO - Raw response for Thứ tư:
+2025-05-02 09:47:18,701 - api.openai_api - INFO - {
+  "Thứ tư": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn", "muối", "hạt tiêu"],
+      "preparation_time": 15,
+      "estimated_cost": 20000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["thịt ba chỉ", "nước mắm", "hạt tiêu", "đường", "tỏi", "trứng gà"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "nước mắm", "hạt tiêu", "đường", "tỏi"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    }
+  }
+}
+2025-05-02 09:47:18,702 - api.openai_api - INFO - Generating menu for Thứ năm
+2025-05-02 09:47:20,221 - api.openai_api - INFO - Raw response for Thứ năm:
+2025-05-02 09:47:20,221 - api.openai_api - INFO - {
+  "Thứ năm": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn", "muối"],
+      "preparation_time": 15,
+      "estimated_cost": 25000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["trứng gà", "thịt ba chỉ", "nước mắm", "hạt tiêu", "tỏi", "đường", "dầu ăn"],
+      "preparation_time": 40,
+      "estimated_cost": 40000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "nước mắm", "hạt tiêu", "tỏi", "dầu ăn"],
+      "preparation_time": 45,
+      "estimated_cost": 65000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    }
+  }
+}
+2025-05-02 09:47:20,221 - api.openai_api - INFO - Generating menu for Thứ sáu
+2025-05-02 09:47:21,708 - api.openai_api - INFO - Raw response for Thứ sáu:
+2025-05-02 09:47:21,708 - api.openai_api - INFO - {
+  "Thứ sáu": {
+    "Bữa sáng": {
+      "name": "Trứng gà ốp la với bí đỏ xào tỏi",
+      "ingredients": ["Trứng gà", "Bí đỏ", "Tỏi", "Dầu ăn"],
+      "preparation_time": 15,
+      "estimated_cost": 25000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu", "Tỏi", "Đường", "Nước"],
+      "preparation_time": 40,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu", "Tỏi", "Dầu ăn"],
+      "preparation_time": 40,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    }
+  }
+}
+2025-05-02 09:47:21,709 - api.openai_api - INFO - Generating menu for Thứ bảy
+2025-05-02 09:47:23,252 - api.openai_api - INFO - Raw response for Thứ bảy:
+2025-05-02 09:47:23,253 - api.openai_api - INFO - {
+  "Thứ bảy": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "hạt tiêu"],
+      "preparation_time": 15,
+      "estimated_cost": 20000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["trứng gà", "thịt ba chỉ", "nước mắm", "hạt tiêu"],
+      "preparation_time": 30,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "ớt", "nước mắm", "hạt tiêu"],
+      "preparation_time": 30,
+      "estimated_cost": 15000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu", "ớt"]
+    }
+  }
+}
+2025-05-02 09:47:23,253 - api.openai_api - INFO - Generating menu for Chủ nhật
+2025-05-02 09:47:24,598 - api.openai_api - INFO - Raw response for Chủ nhật:
+2025-05-02 09:47:24,598 - api.openai_api - INFO - {
+  "Chủ nhật": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn", "muối"],
+      "preparation_time": 15,
+      "estimated_cost": 15000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["trứng gà", "thịt ba chỉ", "nước mắm", "hạt tiêu", "tỏi", "đường", "dầu ăn"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "tỏi", "nước mắm", "hạt tiêu", "dầu ăn"],
+      "preparation_time": 45,
+      "estimated_cost": 20000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    }
+  }
+}
+2025-05-02 09:49:10,041 - api.openai_api - INFO - Generating menu for Thứ hai
+2025-05-02 09:49:18,401 - api.openai_api - INFO - Raw response for Thứ hai:
+2025-05-02 09:49:18,403 - api.openai_api - INFO - {
+  "Thứ hai": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn"],
+      "preparation_time": 15,
+      "estimated_cost": 20000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["thịt ba chỉ", "trứng gà", "nước mắm", "hạt tiêu"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "nước mắm", "hạt tiêu"],
+      "preparation_time": 50,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    }
+  }
+}
+2025-05-02 09:49:18,403 - api.openai_api - INFO - Generating menu for Thứ ba
+2025-05-02 09:49:19,559 - api.openai_api - INFO - Raw response for Thứ ba:
+2025-05-02 09:49:19,559 - api.openai_api - INFO - {
+  "Thứ ba": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn"],
+      "preparation_time": 15,
+      "estimated_cost": 25000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["trứng gà", "thịt ba chỉ", "nước mắm", "hạt tiêu"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "nước mắm", "hạt tiêu"],
+      "preparation_time": 50,
+      "estimated_cost": 37000,
+      "reused_ingredients": []
+    }
+  }
+}
+2025-05-02 09:49:19,560 - api.openai_api - INFO - Generating menu for Thứ tư
+2025-05-02 09:49:20,871 - api.openai_api - INFO - Raw response for Thứ tư:
+2025-05-02 09:49:20,872 - api.openai_api - INFO - {
+  "Thứ tư": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn"],
+      "preparation_time": 15,
+      "estimated_cost": 25000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["thịt ba chỉ", "Nước mắm", "Hạt tiêu", "đường", "tỏi", "dầu ăn"],
+      "preparation_time": 60,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "Nước mắm", "Hạt tiêu", "tỏi", "dầu ăn"],
+      "preparation_time": 50,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    }
+  }
+}
+2025-05-02 09:49:20,873 - api.openai_api - INFO - Generating menu for Thứ năm
+2025-05-02 09:49:22,311 - api.openai_api - INFO - Raw response for Thứ năm:
+2025-05-02 09:49:22,311 - api.openai_api - INFO - {
+  "Thứ năm": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn"],
+      "preparation_time": 15,
+      "estimated_cost": 20000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["thịt ba chỉ", "nước mắm", "hạt tiêu", "trứng gà"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "nước mắm", "hạt tiêu"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    }
+  }
+}
+2025-05-02 09:49:22,311 - api.openai_api - INFO - Generating menu for Thứ sáu
+2025-05-02 09:49:24,391 - api.openai_api - INFO - Raw response for Thứ sáu:
+2025-05-02 09:49:24,391 - api.openai_api - INFO - {
+  "Thứ sáu": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn", "muối"],
+      "preparation_time": 15,
+      "estimated_cost": 20000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["trứng gà", "thịt ba chỉ", "nước mắm", "hạt tiêu", "đường", "tỏi"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "nước mắm", "hạt tiêu", "tỏi"],
+      "preparation_time": 50,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    }
+  }
+}
+2025-05-02 09:49:24,392 - api.openai_api - INFO - Generating menu for Thứ bảy
+2025-05-02 09:49:25,948 - api.openai_api - INFO - Raw response for Thứ bảy:
+2025-05-02 09:49:25,949 - api.openai_api - INFO - {
+  "Thứ bảy": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn", "muối"],
+      "preparation_time": 15,
+      "estimated_cost": 20000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["thịt ba chỉ", "trứng gà", "nước mắm", "hạt tiêu", "đường", "tỏi", "dầu ăn"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "nước mắm", "hạt tiêu", "đường", "tỏi", "dầu ăn"],
+      "preparation_time": 50,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu"]
+    }
+  }
+}
+2025-05-02 09:49:25,950 - api.openai_api - INFO - Generating menu for Chủ nhật
+2025-05-02 09:49:27,311 - api.openai_api - INFO - Raw response for Chủ nhật:
+2025-05-02 09:49:27,311 - api.openai_api - INFO - {
+  "Chủ nhật": {
+    "Bữa sáng": {
+      "name": "Bí đỏ xào tỏi",
+      "ingredients": ["bí đỏ", "tỏi", "dầu ăn"],
+      "preparation_time": 15,
+      "estimated_cost": 20000,
+      "reused_ingredients": []
+    },
+    "Bữa trưa": {
+      "name": "Thịt kho tàu",
+      "ingredients": ["thịt ba chỉ", "nước mắm", "hạt tiêu", "đường", "tỏi"],
+      "preparation_time": 45,
+      "estimated_cost": 35000,
+      "reused_ingredients": []
+    },
+    "Bữa tối": {
+      "name": "Sườn rim dứa",
+      "ingredients": ["sườn heo", "dứa", "nước mắm", "hạt tiêu", "tỏi"],
+      "preparation_time": 50,
+      "estimated_cost": 35000,
+      "reused_ingredients": ["nước mắm", "hạt tiêu", "tỏi"]
+    }
+  }
+}
+2025-05-02 09:56:02,000 - api.openai_api - ERROR - Error generating menu: '\n  "menu"'
+2025-05-02 09:56:32,393 - api.openai_api - ERROR - Error generating menu: '\n  "menu"'
+2025-05-02 09:58:18,447 - api.openai_api - ERROR - Error generating menu: '\n  "menu"'
+2025-05-02 09:59:23,983 - api.openai_api - INFO - Sending request to OpenAI API with model: gpt-4.1-nano
+2025-05-02 09:59:31,811 - api.openai_api - INFO - Raw API Response Object:
+2025-05-02 09:59:31,812 - api.openai_api - INFO - {
+  "id": "chatcmpl-BSav0cfu8rLeU7HhTBxty9GVl8NjA",
+  "object": "chat.completion",
+  "created": 1746154798,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"menu\": {\n    \"Th\u1ee9 hai\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 lu\u1ed9c v\u00e0 B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      }\n    },\n    \"Th\u1ee9 ba\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      }\n    },\n    \"Th\u1ee9 t\u01b0\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 lu\u1ed9c v\u00e0 B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      }\n    },\n    \"Th\u1ee9 n\u0103m\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      }\n    },\n    \"Th\u1ee9 s\u00e1u\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 lu\u1ed9c v\u00e0 B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      }\n    },\n    \"Th\u1ee9 b\u1ea3y\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"B\u00ed \u0111\u1ecf\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      }\n    },\n    \"Ch\u1ee7 nh\u1eadt\": {\n      \"B\u1eefa s\u00e1ng\": {\n        \"name\": \"Tr\u1ee9ng g\u00e0 lu\u1ed9c v\u00e0 B\u00ed \u0111\u1ecf x\u00e0o t\u1ecfi\",\n        \"ingredients\": [\"Tr\u1ee9ng g\u00e0\", \"B\u00ed \u0111\u1ecf\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 20,\n        \"estimated_cost\": 65000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa tr\u01b0a\": {\n        \"name\": \"Th\u1ecbt kho t\u00e0u\",\n        \"ingredients\": [\"Th\u1ecbt ba ch\u1ec9\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 60,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      },\n      \"B\u1eefa t\u1ed1i\": {\n        \"name\": \"S\u01b0\u1eddn rim d\u1ee9a\",\n        \"ingredients\": [\"S\u01b0\u1eddn heo\", \"D\u1ee9a\", \"N\u01b0\u1edbc m\u1eafm\", \"H\u1ea1t ti\u00eau\"],\n        \"preparation_time\": 50,\n        \"estimated_cost\": 70000,\n        \"reused_ingredients\": []\n      }\n    }\n  },\n  \"optimization_notes\": [\n    \"C\u00e1c m\u00f3n \u0103n l\u1eb7p l\u1ea1i ph\u00f9 h\u1ee3p v\u1edbi s\u1edf th\u00edch v\u00e0 ng\u00e2n s\u00e1ch, \u0111\u1ea3m b\u1ea3o th\u1eddi gian ch\u1ebf bi\u1ebfn d\u01b0\u1edbi 60 ph\u00fat.\",\n    \"Ch\u1ecdn nguy\u00ean li\u1ec7u ph\u00f9 h\u1ee3p \u0111\u1ec3 gi\u1eef ng\u00e2n s\u00e1ch 70,000\u0111 m\u1ed7i b\u1eefa.\",\n    \"Kh\u00f4ng s\u1eed d\u1ee5ng h\u00e0nh l\u00e1 hay m\u01b0\u1edbp \u0111\u1eafng \u0111\u1ec3 ph\u00f9 h\u1ee3p s\u1edf th\u00edch c\u00e1 nh\u00e2n.\",\n    \"C\u00e1c m\u00f3n \u0111\u1ec1u mang phong c\u00e1ch \u1ea9m th\u1ef1c mi\u1ec1n B\u1eafc Vi\u1ec7t Nam, t\u1eadp trung v\u00e0o c\u00e1c nguy\u00ean li\u1ec7u nh\u01b0 th\u1ecbt, b\u00ed \u0111\u1ecf, s\u01b0\u1eddn heo, ng\u00f4 ng\u1ecdt, \u1edbt, n\u01b0\u1edbc m\u1eafm, h\u1ea1t ti\u00eau.\"\n  ]\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 313,
+    "completion_tokens": 1716,
+    "total_tokens": 2029,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8fd43718b3"
+}
+2025-05-02 09:59:31,815 - api.openai_api - INFO - Raw API Response:
+2025-05-02 09:59:31,815 - api.openai_api - INFO - {
+  "menu": {
+    "Thứ hai": {
+      "Bữa sáng": {
+        "name": "Trứng gà luộc và Bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      }
+    },
+    "Thứ ba": {
+      "Bữa sáng": {
+        "name": "Bí đỏ xào tỏi",
+        "ingredients": ["Bí đỏ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      }
+    },
+    "Thứ tư": {
+      "Bữa sáng": {
+        "name": "Trứng gà luộc và Bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      }
+    },
+    "Thứ năm": {
+      "Bữa sáng": {
+        "name": "Bí đỏ xào tỏi",
+        "ingredients": ["Bí đỏ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      }
+    },
+    "Thứ sáu": {
+      "Bữa sáng": {
+        "name": "Trứng gà luộc và Bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      }
+    },
+    "Thứ bảy": {
+      "Bữa sáng": {
+        "name": "Bí đỏ xào tỏi",
+        "ingredients": ["Bí đỏ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      }
+    },
+    "Chủ nhật": {
+      "Bữa sáng": {
+        "name": "Trứng gà luộc và Bí đỏ xào tỏi",
+        "ingredients": ["Trứng gà", "Bí đỏ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 20,
+        "estimated_cost": 65000,
+        "reused_ingredients": []
+      },
+      "Bữa trưa": {
+        "name": "Thịt kho tàu",
+        "ingredients": ["Thịt ba chỉ", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 60,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      },
+      "Bữa tối": {
+        "name": "Sườn rim dứa",
+        "ingredients": ["Sườn heo", "Dứa", "Nước mắm", "Hạt tiêu"],
+        "preparation_time": 50,
+        "estimated_cost": 70000,
+        "reused_ingredients": []
+      }
+    }
+  },
+  "optimization_notes": [
+    "Các món ăn lặp lại phù hợp với sở thích và ngân sách, đảm bảo thời gian chế biến dưới 60 phút.",
+    "Chọn nguyên liệu phù hợp để giữ ngân sách 70,000đ mỗi bữa.",
+    "Không sử dụng hành lá hay mướp đắng để phù hợp sở thích cá nhân.",
+    "Các món đều mang phong cách ẩm thực miền Bắc Việt Nam, tập trung vào các nguyên liệu như thịt, bí đỏ, sườn heo, ngô ngọt, ớt, nước mắm, hạt tiêu."
+  ]
+}
