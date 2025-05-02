@@ -128,4 +128,40 @@ class Menu:
             'budget_per_meal': self.budget_per_meal,
             'max_prep_time': self.max_prep_time,
             'meals': self.meals
+        }
+
+
+class Recipe:
+    """Recipe model for storing recipe data."""
+    
+    def __init__(self, id=None, name=None, cuisine_type=None, 
+                 content=None, creation_date=None):
+        self.id = id
+        self.name = name
+        self.cuisine_type = cuisine_type
+        self.content = content  # JSON string of recipe data
+        self.creation_date = creation_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    @classmethod
+    def from_db_row(cls, row):
+        """Create a Recipe instance from a database row."""
+        if not row:
+            return None
+        
+        return cls(
+            id=row[0],
+            name=row[1],
+            cuisine_type=row[2],
+            content=row[3],
+            creation_date=row[4]
+        )
+    
+    def to_dict(self):
+        """Convert Recipe to dictionary."""
+        return {
+            'id': self.id,
+            'name': self.name,
+            'cuisine_type': self.cuisine_type,
+            'content': self.content,
+            'creation_date': self.creation_date
         } 

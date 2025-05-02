@@ -6,7 +6,7 @@ import os
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QTabWidget, QWidget, QVBoxLayout,
     QHBoxLayout, QLabel, QStatusBar, QMenuBar, QMenu, QMessageBox,
-    QFileDialog, QAction
+    QFileDialog, QAction, QProgressBar
 )
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QIcon
@@ -36,7 +36,7 @@ class MainWindow(QMainWindow):
         
         # Set window properties
         self.setWindowTitle(f"{APP_NAME} v{APP_VERSION}")
-        self.setMinimumSize(QSize(1024, 768))
+        self.setMinimumSize(QSize(1200, 800))  # Increased minimum size
         
         # Create UI components
         self._create_menu_bar()
@@ -105,6 +105,8 @@ class MainWindow(QMainWindow):
         """Create the central widget with tabs."""
         central_widget = QWidget()
         main_layout = QVBoxLayout(central_widget)
+        main_layout.setContentsMargins(10, 10, 10, 10)  # Add more padding
+        main_layout.setSpacing(10)  # Increase spacing
         
         # Create tab widget
         self.tab_widget = QTabWidget()
@@ -135,7 +137,32 @@ class MainWindow(QMainWindow):
     def _create_status_bar(self):
         """Create the status bar."""
         self.status_bar = QStatusBar()
+        
+        # Add progress bar
+        self.progress_bar = QProgressBar()
+        self.progress_bar.setMaximumWidth(200)
+        self.progress_bar.hide()  # Hide by default
+        self.status_bar.addPermanentWidget(self.progress_bar)
+        
+        # Add status label
+        self.status_label = QLabel()
+        self.status_bar.addPermanentWidget(self.status_label)
+        
         self.setStatusBar(self.status_bar)
+        
+        # Connect API progress signal
+        self.api.progress_signal.connect(self._update_progress)
+    
+    def _update_progress(self, message: str):
+        """Update progress bar and status message."""
+        if message.startswith("Đang tạo"):
+            self.progress_bar.setMaximum(0)  # Indeterminate progress
+            self.progress_bar.show()
+            self.status_label.setText(message)
+        elif message.startswith("Đã hoàn thành"):
+            self.progress_bar.hide()
+            self.status_label.setText(message)
+            self.status_bar.showMessage(message, 3000)  # Show in status bar for 3 seconds
     
     def _new_menu(self):
         """Create a new menu."""

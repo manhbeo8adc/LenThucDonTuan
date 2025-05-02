@@ -4,7 +4,7 @@ Database manager for handling database operations.
 import sqlite3
 import json
 import os
-from .models import User, Dish, Menu
+from .models import User, Dish, Menu, Recipe
 from config import DATABASE_PATH
 
 
@@ -63,6 +63,17 @@ class DatabaseManager:
             max_prep_time INTEGER,
             meals TEXT,
             FOREIGN KEY (user_id) REFERENCES users (id)
+        )
+        ''')
+        
+        # Create Recipes table
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS recipes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            cuisine_type TEXT,
+            content TEXT,
+            creation_date TEXT
         )
         ''')
         
@@ -298,12 +309,135 @@ class DatabaseManager:
         
         return [Menu.from_db_row(tuple(row)) for row in rows]
     
+    def get_all_menus(self, cuisine_type=None):
+        """Get all menus, optionally filtered by cuisine type."""
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        
+        if cuisine_type:
+            cursor.execute('SELECT * FROM menus WHERE cuisine_type = ? ORDER BY creation_date DESC', (cuisine_type,))
+        else:
+            cursor.execute('SELECT * FROM menus ORDER BY creation_date DESC')
+        
+        rows = cursor.fetchall()
+        
+        conn.close()
+        
+        return [Menu.from_db_row(tuple(row)) for row in rows]
+    
     def delete_menu(self, menu_id):
         """Delete a menu by ID."""
         conn = self._get_connection()
         cursor = conn.cursor()
         
         cursor.execute('DELETE FROM menus WHERE id = ?', (menu_id,))
+        
+        conn.commit()
+        conn.close()
+        
+        return cursor.rowcount > 0
+    
+    # Recipe operations
+    def save_recipe(self, name, content, cuisine_type=None):
+        """Save a recipe to the database.
+        
+        Args:
+            name: Name of the recipe
+            content: JSON string of recipe data
+            cuisine_type: Type of cuisine
+            
+        Returns:
+            Recipe: The saved recipe object
+        """
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        
+        # Check if recipe already exists
+        cursor.execute('SELECT id FROM recipes WHERE name = ?', (name,))
+        row = cursor.fetchone()
+        
+        recipe = Recipe(name=name, content=content, cuisine_type=cuisine_type)
+        
+        if row:
+            # Update existing recipe
+            recipe.id = row[0]
+            cursor.execute('''
+            UPDATE recipes
+            SET content = ?, cuisine_type = ?, creation_date = ?
+            WHERE id = ?
+            ''', (
+                content,
+                cuisine_type,
+                recipe.creation_date,
+                recipe.id
+            ))
+        else:
+            # Insert new recipe
+            cursor.execute('''
+            INSERT INTO recipes (name, cuisine_type, content, creation_date)
+            VALUES (?, ?, ?, ?)
+            ''', (
+                name,
+                cuisine_type,
+                content,
+                recipe.creation_date
+            ))
+            recipe.id = cursor.lastrowid
+        
+        conn.commit()
+        conn.close()
+        return recipe
+    
+    def get_recipe(self, recipe_id):
+        """Get a recipe by ID."""
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute('SELECT * FROM recipes WHERE id = ?', (recipe_id,))
+        row = cursor.fetchone()
+        
+        conn.close()
+        
+        if row:
+            return Recipe.from_db_row(tuple(row))
+        return None
+    
+    def get_recipe_by_name(self, name):
+        """Get a recipe by name."""
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute('SELECT * FROM recipes WHERE name = ?', (name,))
+        row = cursor.fetchone()
+        
+        conn.close()
+        
+        if row:
+            return Recipe.from_db_row(tuple(row))
+        return None
+    
+    def get_all_recipes(self, cuisine_type=None):
+        """Get all recipes, optionally filtered by cuisine type."""
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        
+        if cuisine_type:
+            cursor.execute('SELECT * FROM recipes WHERE cuisine_type = ?', (cuisine_type,))
+        else:
+            cursor.execute('SELECT * FROM recipes ORDER BY name')
+        
+        rows = cursor.fetchall()
+        
+        conn.close()
+        
+        return [Recipe.from_db_row(tuple(row)) for row in rows]
+    
+    def delete_recipe(self, recipe_id):
+        """Delete a recipe by ID."""
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute('DELETE FROM recipes WHERE id = ?', (recipe_id,))
         
         conn.commit()
         conn.close()

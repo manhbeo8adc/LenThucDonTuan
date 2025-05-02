@@ -5,7 +5,6 @@ import sys
 import os
 from dotenv import load_dotenv
 from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import Qt
 
 from ui.main_window import MainWindow
 
