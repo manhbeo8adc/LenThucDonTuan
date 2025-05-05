@@ -1,0 +1,138 @@
+{
+    "version": "1.0",
+    "rules": {
+        "naming": {
+            "files": {
+                "pattern": "^[a-z][a-z0-9_]*\\.(py|md|json|txt)$",
+                "message": "Tên file phải viết thường, sử dụng dấu gạch dưới, bắt đầu bằng chữ cái"
+            },
+            "classes": {
+                "pattern": "^[A-Z][a-zA-Z0-9]*$",
+                "message": "Tên class phải viết hoa chữ cái đầu, sử dụng PascalCase"
+            },
+            "functions": {
+                "pattern": "^[a-z][a-z0-9_]*$",
+                "message": "Tên hàm phải viết thường, sử dụng dấu gạch dưới"
+            },
+            "variables": {
+                "pattern": "^[a-z][a-z0-9_]*$",
+                "message": "Tên biến phải viết thường, sử dụng dấu gạch dưới"
+            },
+            "constants": {
+                "pattern": "^[A-Z][A-Z0-9_]*$",
+                "message": "Tên hằng số phải viết hoa, sử dụng dấu gạch dưới"
+            },
+            "ui_components": {
+                "widgets": {
+                    "pattern": "^[A-Z][a-zA-Z0-9]*Widget$",
+                    "message": "Tên widget phải kết thúc bằng 'Widget', sử dụng PascalCase"
+                },
+                "panels": {
+                    "pattern": "^[A-Z][a-zA-Z0-9]*Panel$",
+                    "message": "Tên panel phải kết thúc bằng 'Panel', sử dụng PascalCase"
+                },
+                "dialogs": {
+                    "pattern": "^[A-Z][a-zA-Z0-9]*Dialog$",
+                    "message": "Tên dialog phải kết thúc bằng 'Dialog', sử dụng PascalCase"
+                },
+                "buttons": {
+                    "pattern": "^[A-Z][a-zA-Z0-9]*Button$",
+                    "message": "Tên button phải kết thúc bằng 'Button', sử dụng PascalCase"
+                },
+                "labels": {
+                    "pattern": "^[A-Z][a-zA-Z0-9]*Label$",
+                    "message": "Tên label phải kết thúc bằng 'Label', sử dụng PascalCase"
+                },
+                "styles": {
+                    "pattern": "^[a-z][a-z0-9_]*_style$",
+                    "message": "Tên style phải kết thúc bằng '_style', sử dụng snake_case"
+                }
+            }
+        },
+        "formatting": {
+            "indentation": {
+                "spaces": 4,
+                "message": "Sử dụng 4 khoảng trắng cho mỗi cấp thụt lề"
+            },
+            "line_length": {
+                "max": 120,
+                "message": "Độ dài dòng không vượt quá 120 ký tự"
+            },
+            "trailing_whitespace": {
+                "forbidden": true,
+                "message": "Không được có khoảng trắng ở cuối dòng"
+            },
+            "blank_lines": {
+                "max_consecutive": 2,
+                "message": "Không được có quá 2 dòng trống liên tiếp"
+            }
+        },
+        "documentation": {
+            "python": {
+                "require_docstring": true,
+                "message": "Mọi module, class và function phải có docstring"
+            },
+            "markdown": {
+                "require_toc": true,
+                "message": "Các file markdown phải có mục lục"
+            }
+        },
+        "imports": {
+            "order": [
+                "standard_library",
+                "third_party",
+                "local"
+            ],
+            "message": "Import phải được sắp xếp theo thứ tự: thư viện chuẩn, thư viện bên thứ ba, thư viện local"
+        },
+        "testing": {
+            "coverage": {
+                "minimum": 80,
+                "message": "Code coverage phải đạt ít nhất 80%"
+            },
+            "require_tests": true,
+            "message": "Mọi tính năng mới phải có test case tương ứng"
+        },
+        "git": {
+            "commit_message": {
+                "pattern": "^(feat|fix|docs|style|refactor|test|chore)(\\([a-z0-9-]+\\))?: .{1,100}$",
+                "message": "Commit message phải tuân theo format: type(scope): description"
+            },
+            "branch_name": {
+                "pattern": "^(feature|bugfix|hotfix|release)\\/[a-z0-9-]+$",
+                "message": "Tên branch phải bắt đầu bằng feature/, bugfix/, hotfix/ hoặc release/"
+            }
+        },
+        "security": {
+            "secrets": {
+                "forbidden_patterns": [
+                    "api_key",
+                    "password",
+                    "secret",
+                    "token"
+                ],
+                "message": "Không được commit các thông tin nhạy cảm"
+            }
+        }
+    },
+    "ignore": {
+        "files": [
+            "*.pyc",
+            "__pycache__",
+            "*.pyo",
+            "*.pyd",
+            ".env",
+            "venv",
+            ".git",
+            ".idea",
+            "*.db",
+            "*.log"
+        ],
+        "directories": [
+            "venv",
+            ".git",
+            ".idea",
+            "__pycache__"
+        ]
+    }
+} 

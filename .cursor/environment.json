@@ -1,0 +1,91 @@
+{
+    "version": "1.0",
+    "environment": {
+        "os": {
+            "name": "Windows",
+            "version": "11",
+            "architecture": "x64"
+        },
+        "python": {
+            "version": "3.11",
+            "interpreter": "venv",
+            "path": "venv/Scripts/python.exe"
+        },
+        "ide": {
+            "name": "Cursor",
+            "version": "latest"
+        },
+        "dependencies": {
+            "requirements_file": "requirements.txt",
+            "update_rules": {
+                "on_add": {
+                    "update_requirements": true,
+                    "update_documentation": true,
+                    "notify_team": true
+                },
+                "on_remove": {
+                    "update_requirements": true,
+                    "update_documentation": true,
+                    "notify_team": true
+                },
+                "on_update": {
+                    "update_requirements": true,
+                    "update_documentation": true,
+                    "notify_team": true
+                }
+            }
+        },
+        "documentation": {
+            "update_rules": {
+                "on_code_change": {
+                    "update_technical_docs": true,
+                    "update_api_docs": true,
+                    "update_ui_docs": true,
+                    "update_database_docs": true
+                },
+                "on_ui_change": {
+                    "update_ui_docs": true,
+                    "update_screenshots": true
+                },
+                "on_api_change": {
+                    "update_api_docs": true,
+                    "update_examples": true
+                },
+                "on_database_change": {
+                    "update_database_docs": true,
+                    "update_erd": true
+                }
+            },
+            "paths": {
+                "technical": "docs/technical",
+                "api": "docs/api",
+                "ui": "docs/ui",
+                "database": "docs/database",
+                "development": "docs/development",
+                "user": "docs/user"
+            }
+        },
+        "git": {
+            "branch_naming": {
+                "feature": "feature/",
+                "bugfix": "bugfix/",
+                "hotfix": "hotfix/",
+                "release": "release/"
+            },
+            "commit_message": {
+                "types": ["feat", "fix", "docs", "style", "refactor", "test", "chore"],
+                "scopes": ["ui", "api", "database", "config", "docs", "deps"]
+            }
+        },
+        "notifications": {
+            "on_dependency_change": {
+                "channels": ["slack", "email"],
+                "recipients": ["team", "lead"]
+            },
+            "on_documentation_change": {
+                "channels": ["slack", "email"],
+                "recipients": ["team", "lead"]
+            }
+        }
+    }
+} 

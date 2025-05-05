@@ -1,0 +1,72 @@
+{
+    "editor": {
+        "tabSize": 4,
+        "insertSpaces": true,
+        "trimTrailingWhitespace": true,
+        "insertFinalNewline": true,
+        "formatOnSave": true,
+        "formatOnPaste": true,
+        "rulers": [120],
+        "wordWrap": "off",
+        "renderWhitespace": "boundary",
+        "renderControlCharacters": true
+    },
+    "python": {
+        "linting": {
+            "enabled": true,
+            "pylintEnabled": true,
+            "flake8Enabled": true,
+            "mypyEnabled": true
+        },
+        "formatting": {
+            "provider": "black",
+            "blackPath": "black",
+            "blackArgs": ["--line-length", "120"]
+        },
+        "testing": {
+            "pytestEnabled": true,
+            "unittestEnabled": true
+        }
+    },
+    "git": {
+        "enabled": true,
+        "autofetch": true,
+        "confirmSync": true,
+        "enableSmartCommit": true
+    },
+    "terminal": {
+        "integrated": {
+            "shell": {
+                "windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+            }
+        }
+    },
+    "files": {
+        "exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/__pycache__": true,
+            "**/*.pyc": true,
+            "**/*.pyo": true,
+            "**/*.pyd": true,
+            "**/venv": true,
+            "**/.env": true,
+            "**/*.db": true,
+            "**/*.log": true
+        },
+        "associations": {
+            "*.py": "python",
+            "*.md": "markdown",
+            "*.json": "json",
+            "*.txt": "plaintext"
+        }
+    },
+    "workbench": {
+        "colorTheme": "Default Dark+",
+        "iconTheme": "vs-seti",
+        "startupEditor": "newUntitledFile"
+    }
+} 
