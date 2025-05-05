@@ -5,10 +5,29 @@ import sys
 import os
 from dotenv import load_dotenv
 from PyQt5.QtWidgets import QApplication, QInputDialog, QMessageBox, QLineEdit
+import logging
+from PyQt5.QtCore import QSettings
 
 from ui.main_window import MainWindow
 from utils.api_key_manager import get_api_key, save_api_key
 
+# Configure logging
+log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs')
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
+log_file = os.path.join(log_dir, 'app.log')
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file),
+        logging.StreamHandler()
+    ]
+)
+
+logger = logging.getLogger(__name__)
+logger.info("Starting application")
 
 def main():
     """Main entry point."""

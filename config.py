@@ -21,7 +21,7 @@ DATABASE_PATH = os.path.join(APP_DATA, 'data.db')
 
 # UI configuration
 APP_NAME = "Lên Thực Đơn Tuần"
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 DEFAULT_WINDOW_WIDTH = 1024
 DEFAULT_WINDOW_HEIGHT = 768
 

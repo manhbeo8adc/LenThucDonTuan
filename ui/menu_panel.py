@@ -3,6 +3,7 @@ Menu panel for displaying and managing the weekly menu.
 """
 import os
 import json
+import logging
 from datetime import datetime
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTabWidget,
@@ -16,6 +17,10 @@ from PyQt5.QtGui import QColor
 from database.models import User, Menu, Recipe
 from utils.helpers import format_currency, format_time
 from utils.ingredient_optimizer import IngredientOptimizer
+from ui.toast import ToastNotification
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 # Create recipes directory if it doesn't exist
 RECIPES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'recipes')
@@ -112,6 +117,9 @@ class MenuPanel(QWidget):
         # Add worker thread references
         self.menu_worker = None
         self.recipe_worker = None
+        
+        # Create toast notification
+        self.toast = ToastNotification(self)
         
         self._create_ui()
     
@@ -229,48 +237,56 @@ class MenuPanel(QWidget):
         self.edit_button.clicked.connect(self._edit_menu)
         self.edit_button.setEnabled(False)
         
-        self.view_recipe_button = QPushButton("Xem công thức")
-        self.view_recipe_button.clicked.connect(self._view_recipe)
-        self.view_recipe_button.setEnabled(False)
-        
         buttons_layout.addWidget(self.clear_button)
         buttons_layout.addWidget(self.save_menu_button)
         buttons_layout.addStretch()
         buttons_layout.addWidget(self.edit_button)
-        buttons_layout.addWidget(self.view_recipe_button)
         
         main_layout.addLayout(buttons_layout)
     
     @pyqtSlot(User)
     def set_user(self, user):
         """Set the user."""
-        self.user = user
-        self.user_status_label.setText(f"Người dùng: {user.name}")
-        self._check_generate_button()
+        try:
+            logger.info(f"Setting user: {user.name}")
+            self.user = user
+            self.user_status_label.setText(f"Người dùng: {user.name}")
+            self._check_generate_button()
+            self.toast.show_message(f"Đã chọn người dùng: {user.name}")
+            logger.info("User set successfully")
+        except Exception as e:
+            logger.error(f"Error setting user: {str(e)}")
+            raise
     
     @pyqtSlot(str)
     def set_cuisine(self, cuisine_type):
         """Set the cuisine type."""
-        self.cuisine_type = cuisine_type
-        self.cuisine_status_label.setText(f"Phong cách ẩm thực: {cuisine_type}")
-        self._check_generate_button()
+        try:
+            logger.info(f"Setting cuisine type: {cuisine_type}")
+            self.cuisine_type = cuisine_type
+            self.cuisine_status_label.setText(f"Phong cách ẩm thực: {cuisine_type}")
+            self._check_generate_button()
+            self.toast.show_message(f"Đã chọn phong cách ẩm thực: {cuisine_type}")
+            logger.info("Cuisine type set successfully")
+        except Exception as e:
+            logger.error(f"Error setting cuisine type: {str(e)}")
+            raise
     
     @pyqtSlot(dict)
     def set_budget_settings(self, settings):
         """Set the budget settings."""
-        self.budget_settings = settings
-        
-        budget_text = format_currency(settings["budget_per_meal"])
-        time_text = format_time(settings["max_prep_time"])
-        days_count = len(settings["days"])
-        meals_count = len(settings["meals_per_day"])
-        
-        self.budget_status_label.setText(
-            f"Ngân sách: {budget_text}, Thời gian: {time_text}, "
-            f"Ngày: {days_count}, Bữa ăn: {meals_count}"
-        )
-        
-        self._check_generate_button()
+        try:
+            logger.info("Setting budget settings")
+            self.budget_settings = settings
+            budget_text = format_currency(settings['budget_per_meal'])
+            prep_time_text = format_time(settings['max_prep_time'])
+            self.budget_status_label.setText(f"Ngân sách: {budget_text} - Thời gian: {prep_time_text}")
+            self._check_generate_button()
+            self.toast.show_message("Đã áp dụng thiết lập thành công!")
+            logger.info("Budget settings set successfully")
+        except Exception as e:
+            logger.error(f"Error setting budget settings: {str(e)}")
+            raise
     
     def _check_generate_button(self):
         """Check if the generate button should be enabled."""
@@ -335,7 +351,6 @@ class MenuPanel(QWidget):
             # Enable buttons
             self.clear_button.setEnabled(True)
             self.edit_button.setEnabled(True)
-            self.view_recipe_button.setEnabled(True)
             self.save_menu_button.setEnabled(True)
         
         # Hide progress
@@ -391,7 +406,7 @@ class MenuPanel(QWidget):
         # Add more spacing for better readability
         layout.setSpacing(8)
         layout.setContentsMargins(10, 10, 10, 10)
-
+        
         # Top info layout
         top_layout = QHBoxLayout()
         
@@ -414,7 +429,7 @@ class MenuPanel(QWidget):
         top_layout.addLayout(info_layout)
         top_layout.addStretch()
         layout.addLayout(top_layout)
-
+        
         # Create a scroll area for detailed information
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
@@ -423,12 +438,12 @@ class MenuPanel(QWidget):
         scroll_content = QWidget()
         scroll_layout = QVBoxLayout(scroll_content)
         scroll_layout.setSpacing(8)
-
+        
         # Create two columns for information
         info_layout = QHBoxLayout()
         left_column = QVBoxLayout()
         right_column = QVBoxLayout()
-
+        
         # Left column: Nutrition and Cooking Method
         if 'nutrition_info' in meal_info:
             nutrition_group = QGroupBox("Thông tin dinh dưỡng")
@@ -444,15 +459,37 @@ class MenuPanel(QWidget):
             nutrition_text.setWordWrap(True)  # Enable word wrap
             nutrition_layout.addWidget(nutrition_text)
             left_column.addWidget(nutrition_group)
-
+        
         if 'cooking_method' in meal_info:
             method_group = QGroupBox("Phương pháp nấu")
             method_layout = QVBoxLayout(method_group)
             method_label = QLabel(", ".join(meal_info['cooking_method']) if isinstance(meal_info['cooking_method'], list) else meal_info['cooking_method'])
             method_label.setWordWrap(True)
             method_layout.addWidget(method_label)
+            
+            # Add view recipe button
+            view_recipe_btn = QPushButton("Xem công thức chi tiết")
+            view_recipe_btn.setStyleSheet("""
+                QPushButton {
+                    font-size: 11pt;
+                    padding: 5px 10px;
+                    border-radius: 4px;
+                    background-color: #DB7093;
+                    color: white;
+                    border: none;
+                }
+                QPushButton:hover {
+                    background-color: #C1638A;
+                }
+                QPushButton:pressed {
+                    background-color: #A5547B;
+                }
+            """)
+            view_recipe_btn.clicked.connect(lambda: self._view_recipe_for_meal(meal_info))
+            method_layout.addWidget(view_recipe_btn)
+            
             left_column.addWidget(method_group)
-
+        
         # Right column: Food Groups and Reused Ingredients
         if 'food_groups' in meal_info:
             groups_group = QGroupBox("Nhóm thực phẩm")
@@ -461,7 +498,7 @@ class MenuPanel(QWidget):
             groups_label.setWordWrap(True)
             groups_layout.addWidget(groups_label)
             right_column.addWidget(groups_group)
-
+        
         if 'reused_ingredients' in meal_info:
             reused_group = QGroupBox("Nguyên liệu tái sử dụng")
             reused_layout = QVBoxLayout(reused_group)
@@ -469,7 +506,7 @@ class MenuPanel(QWidget):
             reused_label.setWordWrap(True)
             reused_layout.addWidget(reused_label)
             right_column.addWidget(reused_group)
-
+        
         # Add ingredients list
         if 'ingredients' in meal_info:
             ingredients_group = QGroupBox("Nguyên liệu")
@@ -478,7 +515,7 @@ class MenuPanel(QWidget):
             ingredients_label.setWordWrap(True)
             ingredients_layout.addWidget(ingredients_label)
             right_column.addWidget(ingredients_group)
-
+        
         # Add columns to info layout
         info_layout.addLayout(left_column)
         info_layout.addLayout(right_column)
@@ -487,9 +524,9 @@ class MenuPanel(QWidget):
         # Set up the scroll area
         scroll_area.setWidget(scroll_content)
         layout.addWidget(scroll_area)
-
+        
         return panel
-
+    
     def _display_menu(self):
         """Display the generated menu."""
         # Clear previous tabs
@@ -642,154 +679,46 @@ class MenuPanel(QWidget):
             # Set the current tab back to the day we were editing
             self.days_tab_widget.setCurrentIndex(current_tab_index)
     
-    def _view_recipe(self):
-        """View the recipe for the selected meal."""
-        if not self.current_menu:
-            return
-        
-        # Get the current day and meal
-        current_tab_index = self.days_tab_widget.currentIndex()
-        if current_tab_index < 0:
-            return
-        
-        current_day = self.days_tab_widget.tabText(current_tab_index)
-        day_widget = self.days_tab_widget.widget(current_tab_index)
-        
-        # Since we're now using a custom layout instead of QTableWidget,
-        # we need to find the selected meal differently
-        selected_meal = None
-        selected_meal_name = None
-        
-        # Show dialog to select meal
-        meal_times = list(self.current_menu[current_day].keys())
-        if not meal_times:
-            return
-            
-        if len(meal_times) == 1:
-            selected_meal = meal_times[0]
-        else:
-            # Create a simple dialog to select the meal
-            dialog = QDialog(self)
-            dialog.setWindowTitle("Chọn bữa ăn")
-            layout = QVBoxLayout(dialog)
-            
-            label = QLabel("Chọn bữa ăn để xem công thức:")
-            layout.addWidget(label)
-            
-            combo = QComboBox()
-            combo.setStyleSheet("""
-                QComboBox {
-                    font-size: 12pt;
-                    padding: 5px;
-                    border: 1px solid #CCCCCC;
-                    border-radius: 4px;
-                    color: black;
-                    background-color: white;
-                }
-                QComboBox::drop-down {
-                    width: 30px;
-                    border: none;
-                    background-color: transparent;
-                }
-                QComboBox:hover {
-                    border: 1px solid #DB7093;
-                }
-                QComboBox QAbstractItemView {
-                    background-color: white;
-                    border: 1px solid #CCCCCC;
-                    color: black;
-                    selection-background-color: #DB7093;
-                    selection-color: white;
-                    outline: none;
-                }
-                QComboBox QAbstractItemView::item {
-                    min-height: 30px;
-                    padding: 5px;
-                    border: none;
-                }
-                QComboBox QAbstractItemView::item:selected {
-                    background-color: #DB7093;
-                    color: white;
-                }
-                QComboBox QAbstractItemView::item:hover {
-                    background-color: #FFF0F5;
-                    color: black;
-                    border: none;
-                }
-            """)
-            for meal_time in meal_times:
-                meal_name = self.current_menu[current_day][meal_time]["name"]
-                combo.addItem(f"{meal_time}: {meal_name}", meal_time)
-            layout.addWidget(combo)
-            
-            buttons = QHBoxLayout()
-            cancel_btn = QPushButton("Hủy")
-            cancel_btn.clicked.connect(dialog.reject)
-            ok_btn = QPushButton("Xem công thức")
-            ok_btn.clicked.connect(dialog.accept)
-            buttons.addWidget(cancel_btn)
-            buttons.addWidget(ok_btn)
-            layout.addLayout(buttons)
-            
-            if dialog.exec() == QDialog.DialogCode.Accepted:
-                selected_meal = combo.currentData()
-            else:
-                return
-        
-        # Get meal info
-        meal_info = self.current_menu[current_day][selected_meal]
-        dish_name = meal_info["name"]
-        
-        # Get servings from the meal info or budget settings
-        servings = meal_info.get("servings", 4)  # Default to 4 if not specified in meal
-        
-        # Use budget settings servings if available
-        if self.budget_settings and "servings" in self.budget_settings:
-            servings = self.budget_settings["servings"]
-            # Update the meal info with the current servings value
-            if "servings" in meal_info:
-                meal_info["servings"] = servings
-        
-        # First check if recipe exists in database
-        recipe = self.db_manager.get_recipe_by_name(dish_name)
-        
-        if recipe:
-            # Display cached recipe
-            self.status_label.setText(f"Hiển thị công thức đã lưu cho món {dish_name}")
-            
-            try:
-                recipe_data = json.loads(recipe.content)
-                # Update the servings in the recipe data if needed
-                if "recipe" in recipe_data and "servings" in recipe_data["recipe"]:
-                    recipe_data["recipe"]["servings"] = servings
-                dialog = RecipeDialog(self, recipe_data, dish_name)
-                dialog.exec()
-                return
-            except Exception as e:
-                print(f"Error loading cached recipe: {e}")
-                # Continue to fetch new recipe if cached one has issues
-        
-        # Show progress
-        self.status_label.setText(f"Đang tạo công thức cho món {dish_name}... Vui lòng đợi")
-        self.progress_container.setVisible(True)
-        
-        # Connect API progress signal to status label
-        self.api.progress_signal.connect(self._update_status_label)
-        
-        # Create and start worker thread
-        self.recipe_worker = RecipeGeneratorWorker(
-            self.api,
-            dish_name,
-            self.cuisine_type,
-            servings
-        )
-        
-        # Connect signals
-        self.recipe_worker.finished.connect(lambda recipe_data: self._handle_recipe_result(recipe_data, dish_name))
-        self.recipe_worker.error.connect(self._handle_recipe_error)
-        
-        # Start the worker
-        self.recipe_worker.start()
+    def _view_recipe_for_meal(self, meal_info):
+        """View recipe for a specific meal."""
+        import logging
+        logger = logging.getLogger(__name__)
+        try:
+            logger.info(f"[VIEW RECIPE] Bắt đầu xem công thức cho món: {meal_info.get('name')}")
+            dish_name = meal_info["name"]
+            servings = meal_info.get("servings", 4)
+            if self.budget_settings and "servings" in self.budget_settings:
+                servings = self.budget_settings["servings"]
+            recipe = self.db_manager.get_recipe_by_name(dish_name)
+            if recipe:
+                self.status_label.setText(f"Hiển thị công thức đã lưu cho món {dish_name}")
+                try:
+                    recipe_data = json.loads(recipe.content)
+                    if "recipe" in recipe_data and "servings" in recipe_data["recipe"]:
+                        recipe_data["recipe"]["servings"] = servings
+                    dialog = RecipeDialog(self, recipe_data, dish_name)
+                    dialog.exec()
+                    logger.info(f"[VIEW RECIPE] Đã hiển thị công thức đã lưu cho món: {dish_name}")
+                    return
+                except Exception as e:
+                    logger.error(f"[VIEW RECIPE] Lỗi khi load công thức đã lưu: {e}")
+            self.status_label.setText(f"Đang tạo công thức cho món {dish_name}... Vui lòng đợi")
+            self.progress_container.setVisible(True)
+            self.api.progress_signal.connect(self._update_status_label)
+            self.recipe_worker = RecipeGeneratorWorker(
+                self.api,
+                dish_name,
+                self.cuisine_type,
+                servings
+            )
+            self.recipe_worker.finished.connect(lambda recipe_data: self._handle_recipe_result(recipe_data, dish_name))
+            self.recipe_worker.error.connect(self._handle_recipe_error)
+            self.recipe_worker.start()
+            logger.info(f"[VIEW RECIPE] Đã bắt đầu tạo công thức mới cho món: {dish_name}")
+        except Exception as e:
+            logger.error(f"[VIEW RECIPE] Lỗi tổng quát khi xem công thức: {e}")
+            import traceback
+            logger.error(traceback.format_exc())
     
     def _handle_recipe_result(self, recipe_data, dish_name):
         """Handle the recipe generation result."""
@@ -845,7 +774,6 @@ class MenuPanel(QWidget):
         # Disable buttons
         self.clear_button.setEnabled(False)
         self.edit_button.setEnabled(False)
-        self.view_recipe_button.setEnabled(False)
         self.save_menu_button.setEnabled(False)
     
     def get_menu_data(self):
@@ -876,7 +804,6 @@ class MenuPanel(QWidget):
         # Enable buttons
         self.clear_button.setEnabled(True)
         self.edit_button.setEnabled(True)
-        self.view_recipe_button.setEnabled(True)
         self.save_menu_button.setEnabled(True)
         
         return True
@@ -1517,17 +1444,10 @@ class RecipeDialog(QDialog):
             
             # Buttons
             buttons_layout = QHBoxLayout()
-            
-            save_button = QPushButton("Lưu công thức")
-            save_button.clicked.connect(self._save_recipe)
-            
             close_button = QPushButton("Đóng")
             close_button.clicked.connect(self.close)
-            
             buttons_layout.addStretch()
-            buttons_layout.addWidget(save_button)
             buttons_layout.addWidget(close_button)
-            
             layout.addLayout(buttons_layout)
             
         except Exception as e:
@@ -1545,31 +1465,6 @@ class RecipeDialog(QDialog):
             
             layout.addLayout(buttons_layout)
     
-    def _save_recipe(self):
-        """Save the recipe to a file."""
-        file_name, _ = QFileDialog.getSaveFileName(
-            self,
-            "Lưu công thức",
-            f"{self.dish_name}.json",
-            "JSON Files (*.json)"
-        )
-        
-        if file_name:
-            try:
-                with open(file_name, 'w', encoding='utf-8') as f:
-                    json.dump(self.recipe_data, f, ensure_ascii=False, indent=2)
-                QMessageBox.information(
-                    self,
-                    "Lưu thành công",
-                    f"Đã lưu công thức vào {file_name}"
-                )
-            except Exception as e:
-                QMessageBox.critical(
-                    self,
-                    "Lỗi",
-                    f"Không thể lưu công thức: {str(e)}"
-                )
-
 
 class SavedRecipesDialog(QDialog):
     """Dialog for viewing saved recipes."""

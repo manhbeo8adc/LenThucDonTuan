@@ -11,7 +11,9 @@ from config import OPENAI_MODEL
 from utils.api_key_manager import get_api_key
 
 # Configure logging
-log_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app.log')
+log_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'logs', 'app.log')
+if not os.path.exists(os.path.dirname(log_file)):
+    os.makedirs(os.path.dirname(log_file))
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
